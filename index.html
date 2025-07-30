@@ -15,7 +15,22 @@
       font-family: sans-serif;
       background-color: #ededed;
     }
+
+    html[theme="dark"],
+    html[theme="dark"] body {
+      background-color: #121212;
+      color: #ffffff;
+    }
   </style>
+  <script>
+    const userPrefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
+    const darkTheme =
+      localStorage.getItem('theme-dark') ||
+      (userPrefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('theme', darkTheme);
+  </script>
   <title>skydive-compass</title>
 </head>
 
