@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit';
-import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
+import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
 import { LocalizeMixin } from '@lion/ui/localize.js';
 import { ThemeMixin, ThemeToggler } from 'dark-theme-utils';
 
@@ -10,14 +10,14 @@ import { TopBar } from './ui/TopBar.js';
 const logo = new URL('../assets/cropped_alti_compass.png', import.meta.url)
   .href;
 
-export class SkydiveCompass extends ScopedElementsMixin(
+export class SkydiveCompass extends ScopedRegistryHost(
   LocalizeMixin(ThemeMixin(LitElement)),
 ) {
   static localizeNamespaces = ['skydive-compass'];
 
   static styles = [styles];
 
-  static scopedElements = {
+  static elementDefinitions = {
     'theme-toggler': ThemeToggler,
     'top-bar': TopBar,
   };
