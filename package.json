@@ -3,6 +3,9 @@
   "description": "Webcomponent skydive-compass following open-wc recommendations",
   "version": "0.0.1",
   "type": "module",
+  "author": {
+    "name": "Pieterv24"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
