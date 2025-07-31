@@ -7,19 +7,21 @@
   <meta name="Description" content="Put your description here.">
   <base href="">
 
+  <link rel="stylesheet" href="./assets/material-pallete/dark.css" />
+  <link rel="stylesheet" href="./assets/material-pallete/light.css" />
   <style>
+    :root {
+      --md-ref-typeface-brand: sans-serif;
+      --md-ref-typeface-plain: sans-serif, system-ui;
+    }
+
     html,
     body {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
-      background-color: #ededed;
-    }
-
-    html[theme="dark"],
-    html[theme="dark"] body {
-      background-color: #121212;
-      color: #ffffff;
+      font-family: var(--md-ref-typeface-brand);
+      background-color: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-background);
     }
   </style>
   <script>
@@ -33,7 +35,9 @@
   </script>
 
   <script type="module">
+    // Load polyfills
     import "@webcomponents/scoped-custom-element-registry";
+    import 'urlpattern-polyfill';
   </script>
   <title>skydive-compass</title>
 </head>

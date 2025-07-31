@@ -15,12 +15,4 @@ export default css`
   main {
     flex-grow: 1;
   }
-
-  .logo {
-    margin-top: 36px;
-  }
-
-  .logo img {
-    max-height: 30vh;
-  }
 `;

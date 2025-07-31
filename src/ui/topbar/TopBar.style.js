@@ -12,20 +12,38 @@ export default css`
   }
 
   .top-bar {
-    background-color: blue;
-    color: white;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
     border-radius: 12px;
 
     margin: 16px;
 
     min-height: 2em;
     width: 100%;
+
+    display: flex;
+    flex-direction: row;
   }
 
-  .top-bar-right-content {
+  .right {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
     height: 100%;
+    flex-grow: 1;
+
+    padding: 0px 8px;
+  }
+
+  .left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    height: 100%;
+    flex-grow: 1;
+
+    padding: 0px 8px;
   }
 `;
