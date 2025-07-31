@@ -1,26 +1,23 @@
-<p align="center">
-  <img width="200" src="https://open-wc.org/hero.png"></img>
-</p>
+## Skydive Compass
 
-## Open-wc Starter App
-
-[![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
+[![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)  
+[![Built with vite ](https://img.shields.io/badge/built%20with-vite-yellow.svg)](https://vite.dev)  
+[![Built with lion ](https://img.shields.io/badge/built%20with-lion-orange.svg)](https://github.com/ing-bank/lion)
 
 ## Quickstart
 
 To get started:
 
 ```bash
-npm init @open-wc
-# requires node 10 & npm 6 or higher
+npm i
+npm run dev # for local dev server
 ```
 
 ## Scripts
 
-- `start` runs your app for development, reloading on file changes
-- `start:build` runs your app after it has been built using the build command
+- `dev` runs your app for development, reloading on file changes
+- `preview` runs your app after it has been built using the build command
 - `build` builds your app and outputs it in your `dist` directory
-- `test` runs your test suite with Web Test Runner
 - `lint` runs the linter for your project
 - `format` fixes linting and formatting errors
 
