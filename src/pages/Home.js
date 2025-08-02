@@ -6,11 +6,14 @@ import { Router } from '@lit-labs/router';
 
 import styles from './Home.style.js';
 import { msg } from '../../translations/namespace.js';
+import { ThemeMixin } from 'dark-theme-utils';
 
 const logo = new URL('../../assets/cropped_alti_compass.png', import.meta.url)
   .href;
 
-export class Home extends ScopedRegistryHost(LocalizeMixin(LitElement)) {
+export class Home extends ScopedRegistryHost(
+  LocalizeMixin(ThemeMixin(LitElement)),
+) {
   static localizeNamespaces = ['skydive-compass'];
 
   static styles = [styles];

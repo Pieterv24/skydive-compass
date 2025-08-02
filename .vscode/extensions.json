@@ -1,8 +1,9 @@
 {
 	"recommendations": [
-		"esbenp.prettier-vscode", 
+		"esbenp.prettier-vscode",
 		"runem.lit-plugin",
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint",
+    "styled-components.vscode-styled-components"
 	],
 	"unwantedRecommendations": [
 	]

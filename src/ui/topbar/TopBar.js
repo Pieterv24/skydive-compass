@@ -1,9 +1,10 @@
-import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
+import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
 import { html, LitElement } from 'lit';
 
 import styles from './TopBar.style.js';
+import { ThemeMixin } from 'dark-theme-utils';
 
-export class TopBar extends ScopedElementsMixin(LitElement) {
+export class TopBar extends ScopedRegistryHost(ThemeMixin(LitElement)) {
   static styles = [styles];
 
   render() {

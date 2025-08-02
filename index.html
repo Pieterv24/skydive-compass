@@ -4,40 +4,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
   <meta name="Description" content="Put your description here.">
-  <base href="">
 
   <link rel="stylesheet" href="./assets/material-pallete/dark.css" />
   <link rel="stylesheet" href="./assets/material-pallete/light.css" />
-  <style>
-    :root {
-      --md-ref-typeface-brand: sans-serif;
-      --md-ref-typeface-plain: sans-serif, system-ui;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: var(--md-ref-typeface-brand);
-      background-color: var(--md-sys-color-background);
-      color: var(--md-sys-color-on-background);
-    }
-  </style>
-  <script>
-    const userPrefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)',
-    ).matches;
-    const darkTheme =
-      localStorage.getItem('theme-dark') ||
-      (userPrefersDark ? 'dark' : 'light');
-    document.documentElement.setAttribute('theme', darkTheme);
-  </script>
+  <link rel="stylesheet" href="./index.css" />
 
   <script type="module">
     // Load polyfills
     import "@webcomponents/scoped-custom-element-registry";
     import 'urlpattern-polyfill';
+
+    // Prevent FART (Flash of inAccurate coloR Theme)
+    import { preventFart } from 'dark-theme-utils';
+    preventFart();
   </script>
   <title>skydive-compass</title>
 </head>
@@ -45,7 +26,13 @@
 <body>
   <skydive-compass></skydive-compass>
 
-  <script type="module" src="./__element-definitions/skydive-compass.js"></script>
+  <script type="module">
+    import { SkydiveCompass } from './src/SkydiveCompass.js';
+
+    if (!customElements.get('skydive-compass')) {
+      customElements.define('skydive-compass', SkydiveCompass);
+    }
+  </script>
 </body>
 
 </html>
