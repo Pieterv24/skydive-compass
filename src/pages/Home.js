@@ -1,8 +1,6 @@
 import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
 import { LocalizeMixin } from '@lion/ui/localize.js';
 import { html, LitElement } from 'lit';
-import { MdFilledButton } from '@material/web/button/filled-button.js';
-import { Router } from '@lit-labs/router';
 
 import styles from './Home.style.js';
 import { msg } from '../../translations/namespace.js';
@@ -18,9 +16,7 @@ export class Home extends ScopedRegistryHost(
 
   static styles = [styles];
 
-  static elementDefinitions = {
-    'md-filled-button': MdFilledButton,
-  };
+  static elementDefinitions = {};
 
   static properties = {};
 
@@ -29,9 +25,12 @@ export class Home extends ScopedRegistryHost(
       <div class="logo"><img alt="logo" src=${logo} /></div>
       <h1>${msg('TITLE')}</h1>
       <p>${msg('DESCRIPTION')}</p>
-      <md-filled-button @click=${() => (window.location = '/test')}
-        >${msg('GET_STARTED')}</md-filled-button
+      <button
+        class="mx-auto items-center gap-x-4 rounded-xl bg-white- p-6 outline "
+        @click=${() => (window.location = '/test')}
       >
+        ${msg('GET_STARTED')}
+      </button>
     `;
   }
 }
