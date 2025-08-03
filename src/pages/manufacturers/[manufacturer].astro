@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import canopies from '../../data/canopies.json';
+import manufacturers from '../../data/manufacturers.json';
+
+export async function getStaticPaths() {
+  return manufacturers.map(manufacturer => {
+    const filteredCanopies = canopies.filter(canopy => canopy.manufacturerid === manufacturer.id);
+    return {
+      params: { manufacturer: manufacturer.id },
+      props: { manufacturer, filteredCanopies }
+    }
+  });
+};
+
+const {manufacturer, filteredCanopies} = Astro.props;
+---
+
+<BaseLayout pageTitle={manufacturer.name}>
+  <ul>
+    {filteredCanopies.map(canopy => (<li><a href={`canopies/${canopy.id}`}>{canopy.name}</a></li>))}
+  </ul>
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import canopies from '../../data/canopies.json';
+
+const pageTitle = "Canopies";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <ul>
+  {canopies.map(canopy => (
+    <li><a href={`canopies/${canopy.id}`}>{canopy.name}</a></li>
+  ))}
+  </ul>
+</BaseLayout>
