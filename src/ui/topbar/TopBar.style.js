@@ -12,8 +12,8 @@ export default css`
   }
 
   .top-bar {
-    background-color: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
+    background-color: var(--sl-color-primary-600);
+    color: var(--sl-color-neutral-1000);
     border-radius: 12px;
 
     margin: 16px;

@@ -17,13 +17,17 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "@awesome.me/webawesome": "^3.0.0-beta.3",
     "@lion/ui": "^0.13.0",
     "@lit-labs/router": "^0.1.4",
     "@lit-labs/scoped-registry-mixin": "^1.0.4",
+    "@shoelace-style/shoelace": "^2.20.1",
+    "@vaadin/router": "^2.0.0",
     "@webcomponents/scoped-custom-element-registry": "^0.0.10",
     "dark-theme-utils": "^0.4.0",
     "lit": "^3.1.4",
-    "urlpattern-polyfill": "^10.1.0"
+    "urlpattern-polyfill": "^10.1.0",
+    "vite-plugin-static-copy": "^3.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

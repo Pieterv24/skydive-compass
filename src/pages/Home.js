@@ -2,9 +2,13 @@ import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
 import { LocalizeMixin } from '@lion/ui/localize.js';
 import { html, LitElement } from 'lit';
 
+import SlButton from '@shoelace-style/shoelace/dist/components/button/button.component.js';
+
 import styles from './Home.style.js';
 import { msg } from '../../translations/namespace.js';
 import { ThemeMixin } from 'dark-theme-utils';
+
+import { Button } from '../ui/components/Button.js';
 
 const logo = new URL('../../assets/cropped_alti_compass.png', import.meta.url)
   .href;
@@ -16,7 +20,10 @@ export class Home extends ScopedRegistryHost(
 
   static styles = [styles];
 
-  static elementDefinitions = {};
+  static elementDefinitions = {
+    'sl-button': SlButton,
+    'my-button': Button,
+  };
 
   static properties = {};
 
@@ -25,12 +32,12 @@ export class Home extends ScopedRegistryHost(
       <div class="logo"><img alt="logo" src=${logo} /></div>
       <h1>${msg('TITLE')}</h1>
       <p>${msg('DESCRIPTION')}</p>
-      <button
-        class="mx-auto items-center gap-x-4 rounded-xl bg-white- p-6 outline "
-        @click=${() => (window.location = '/test')}
-      >
+      <sl-button pill size="large" variant="primary" href="/test">
         ${msg('GET_STARTED')}
-      </button>
+      </sl-button>
+      <my-button @click=${() => (window.location = '/test2')}>
+        Hello World
+      </my-button>
     `;
   }
 }
