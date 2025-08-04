@@ -1,23 +1,28 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import canopies from '../../data/canopies.json';
 import manufacturers from '../../data/manufacturers.json';
 
 export async function getStaticPaths() {
   return canopies.map(canopy => {
-    const manufacturer = manufacturers.filter(entry => entry.id === canopy.manufacturerid)[0];
+    const manufacturer = manufacturers.filter(
+      entry => entry.id === canopy.manufacturerid,
+    )[0];
     return {
       params: { canopy: canopy.id },
-      props: { canopy, manufacturer }
-    }
+      props: { canopy, manufacturer },
+    };
   });
-};
+}
 
-const {canopy, manufacturer} = Astro.props;
+const { canopy, manufacturer } = Astro.props;
 ---
 
 <BaseLayout pageTitle={canopy.name}>
   <h2>Cells: {canopy.cells}</h2>
   <h2>Category: {canopy.category}</h2>
-  <h3>Manufacturer: {manufacturer.name}</h3>
+  <h3>
+    Manufacturer: <a href={`manufacturers/${manufacturer.id}`}
+      >{manufacturer.name}</a>
+  </h3>
 </BaseLayout>
