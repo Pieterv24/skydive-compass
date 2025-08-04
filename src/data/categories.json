@@ -1,44 +1,44 @@
 {
-    "1": {
-        "minSize": 170,
-        "maxWingload": 1.1,
-        "jumpsRequired": 0,
-        "recentJumpsRequired": 0
-    },
-    "2": {
-        "minSize": 170,
-        "maxWingload": 1.1,
-        "jumpsRequired": 25,
-        "recentJumpsRequired": 10
-    },
-    "3": {
-        "minSize": 150,
-        "maxWingload": 1.3,
-        "jumpsRequired": 100,
-        "recentJumpsRequired": 25
-    },
-    "4": {
-        "minSize": 135,
-        "maxWingload": 1.5,
-        "jumpsRequired": 400,
-        "recentJumpsRequired": 50
-    },
-    "5": {
-        "minSize": 120,
-        "maxWingload": 1.7,
-        "jumpsRequired": 700,
-        "recentJumpsRequired": 75
-    },
-    "6": {
-        "minSize": 0,
-        "maxWingload": 100,
-        "jumpsRequired": 1000,
-        "recentJumpsRequired": 100
-    },
-    "7": {
-        "minSize": 0,
-        "maxWingload": 100,
-        "jumpsRequired": 1200,
-        "recentJumpsRequired": 100
-    }
+  "1": {
+    "minSize": 170,
+    "maxWingload": 1.1,
+    "jumpsRequired": 0,
+    "recentJumpsRequired": 0
+  },
+  "2": {
+    "minSize": 170,
+    "maxWingload": 1.1,
+    "jumpsRequired": 25,
+    "recentJumpsRequired": 10
+  },
+  "3": {
+    "minSize": 150,
+    "maxWingload": 1.3,
+    "jumpsRequired": 100,
+    "recentJumpsRequired": 25
+  },
+  "4": {
+    "minSize": 135,
+    "maxWingload": 1.5,
+    "jumpsRequired": 400,
+    "recentJumpsRequired": 50
+  },
+  "5": {
+    "minSize": 120,
+    "maxWingload": 1.7,
+    "jumpsRequired": 700,
+    "recentJumpsRequired": 75
+  },
+  "6": {
+    "minSize": 0,
+    "maxWingload": 100,
+    "jumpsRequired": 1000,
+    "recentJumpsRequired": 100
+  },
+  "7": {
+    "minSize": 0,
+    "maxWingload": 100,
+    "jumpsRequired": 1200,
+    "recentJumpsRequired": 100
+  }
 }

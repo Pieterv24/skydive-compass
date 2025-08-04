@@ -5,6 +5,6 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://static.pieterv24.dev/skydivekompas",
-  integrations: [react()]
+  site: 'https://static.pieterv24.dev/skydivekompas',
+  integrations: [react()],
 });

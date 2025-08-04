@@ -1,6 +1,5 @@
-import { ThemeProvider, createTheme, useColorScheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import ThemeSwitcher from './ThemeSwitcher';
 
 const theme = createTheme({
   // cssVariables: true,
@@ -9,23 +8,26 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#565992"
+      main: '#565992',
     },
     secondary: {
-      main: "##928e55"
+      main: '##928e55',
     },
     error: {
-      main: "#BA1A1A"
-    }
-  }
+      main: '#BA1A1A',
+    },
+  },
 });
 
-export default function GlobalMui({children}) {
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function GlobalMui({ children }: Props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ThemeSwitcher client:load />
       {children}
     </ThemeProvider>
-  )
+  );
 }
