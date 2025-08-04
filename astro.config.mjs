@@ -9,5 +9,5 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://static.pieterv24.dev/skydivekompas/', // Ensure a trailing slash is present
   trailingSlash: 'never',
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap()]
 });

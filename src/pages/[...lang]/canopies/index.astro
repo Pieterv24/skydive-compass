@@ -1,0 +1,38 @@
+---
+import { languages, showDefaultLang, defaultLang } from '../../../i18n/ui';
+import {
+  useTranslations,
+  getLangFromUrl,
+  useTranslatedPath,
+} from '../../../i18n/utils';
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import canopies from '../../../data/canopies.json';
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map(lang => {
+    if (!showDefaultLang && lang === defaultLang) {
+      return { params: { lang: undefined } };
+    }
+    return { params: { lang } };
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const pageTitle = t('nav.canopies');
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <ul>
+    {
+      canopies.map(canopy => (
+        <li>
+          <a href={translatePath(`/canopies/${canopy.id}`)}>{canopy.name}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

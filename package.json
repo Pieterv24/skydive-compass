@@ -5,7 +5,7 @@
   "scripts": {
     "start": "astro dev",
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "rimraf dist && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro && prettier \"**/*.{js,mjs,ts,mts,html,json}\" --check",
@@ -41,6 +41,7 @@
     "postcss-load-config": "^6.0.1",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
+    "rimraf": "^6.0.1",
     "typescript-eslint": "^8.38.0"
   },
   "peerDependencies": {

@@ -1,0 +1,41 @@
+---
+import { languages, showDefaultLang, defaultLang } from '../../../i18n/ui';
+import {
+  useTranslations,
+  getLangFromUrl,
+  useTranslatedPath,
+} from '../../../i18n/utils';
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+import manufacturers from '../../../data/manufacturers.json';
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map(lang => {
+    if (!showDefaultLang && lang === defaultLang) {
+      return { params: { lang: undefined } };
+    }
+    return { params: { lang } };
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const pageTitle = t('nav.manufacturers');
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <ul>
+    {
+      manufacturers.map(manufacturer => (
+        <li>
+          <a href={translatePath(`/manufacturers/${manufacturer.id}`)}>
+            {manufacturer.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
