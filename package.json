@@ -13,7 +13,7 @@
     "prepare": "husky && panda codegen",
     "lint-staged": "lint-staged",
     "commitlint": "commitlint --edit",
-    "commit": "git-cz"
+    "commit": "lint-staged && git-cz --no-verify"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
