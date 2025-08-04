@@ -1,0 +1,6 @@
+import postcssPlugin from '@pandacss/dev/postcss';
+
+/** @type {import('postcss-load-config').Config} */
+export default {
+  plugins: [postcssPlugin()],
+};

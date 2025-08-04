@@ -1,13 +1,7 @@
 ---
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
 import '../styles/global.css';
 
-import GlobalMui from '../components/GlobalMui';
 import Navigation from '../components/Navigation.astro';
-import ThemeSwitcher from '../components/ThemeSwitcher';
 
 const { pageTitle } = Astro.props;
 ---
@@ -22,11 +16,8 @@ const { pageTitle } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <GlobalMui client:load>
-      <ThemeSwitcher client:load />
-      <Navigation />
-      <h1>{pageTitle}</h1>
-      <slot />
-    </GlobalMui>
+    <Navigation />
+    <h1>{pageTitle}</h1>
+    <slot />
   </body>
 </html>
