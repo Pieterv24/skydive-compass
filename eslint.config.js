@@ -5,10 +5,11 @@ import ts from 'typescript-eslint';
 import pluginAstro from 'eslint-plugin-astro';
 import pluginReact from 'eslint-plugin-react';
 import configPrettier from 'eslint-config-prettier/flat';
+import gitignore from 'eslint-config-flat-gitignore';
 
 const config = defineConfig([
+  gitignore(),
   {
-    ignores: ['dist/*', 'node_modules/*'],
     settings: {
       react: {
         version: 'detect', // Automatically detect the version of React to use

@@ -1,6 +1,6 @@
 ---
 import { languages, showDefaultLang, defaultLang } from '../../../i18n/ui';
-import { getLangFromUrl, useTranslatedPath } from '../../../i18n/utils';
+import { useTranslatedPath } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
   return Object.keys(languages).map(lang => {
@@ -11,8 +11,7 @@ export async function getStaticPaths() {
   });
 }
 
-const lang = getLangFromUrl(Astro.url);
-const translatePath = useTranslatedPath(lang);
+const translatePath = useTranslatedPath(Astro.url);
 
 return Astro.redirect(translatePath('/info/manufacturers'), 301);
 ---

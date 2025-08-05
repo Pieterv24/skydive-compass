@@ -1,20 +1,13 @@
 ---
-import { languages, showDefaultLang, defaultLang } from '../../i18n/ui';
-import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+import { useTranslations, buildStaticRoutes } from '../../i18n/utils';
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  return Object.keys(languages).map(lang => {
-    if (!showDefaultLang && lang === defaultLang) {
-      return { params: { lang: undefined } };
-    }
-    return { params: { lang } };
-  });
+  return buildStaticRoutes();
 }
 
-const langFromUrl = getLangFromUrl(Astro.url);
-const t = useTranslations(langFromUrl);
+const t = useTranslations(Astro.url);
 
 const pageTitle = t('site.title');
 ---

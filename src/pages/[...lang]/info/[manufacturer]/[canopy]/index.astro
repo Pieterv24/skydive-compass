@@ -2,11 +2,10 @@
 import { getCollection } from 'astro:content';
 
 import {
-  languages,
-  showDefaultLang,
-  defaultLang,
-} from '../../../../../i18n/ui';
-import { getLangFromUrl, useTranslatedPath } from '../../../../../i18n/utils';
+  buildStaticRoutes,
+  getLangFromUrl,
+  useTranslatedPath,
+} from '../../../../../i18n/utils';
 
 import BaseLayout from '../../../../../layouts/BaseLayout.astro';
 
@@ -14,27 +13,20 @@ export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
   const manufacturers = await getCollection('manufacturers');
 
-  return Object.keys(languages).flatMap(lang => {
-    return canopies.map(canopy => {
+  return buildStaticRoutes(
+    canopies.map(canopy => {
       const manufacturer = manufacturers.find(
         m => m.id === canopy.data.manufacturerSlug,
       );
-      if (!showDefaultLang && lang === defaultLang) {
-        return {
-          params: { canopy: canopy.data.slug, manufacturer: manufacturer?.id },
-          props: { canopy, manufacturer },
-        };
-      }
       return {
         params: {
           canopy: canopy.data.slug,
           manufacturer: manufacturer?.id,
-          lang,
         },
         props: { canopy, manufacturer },
       };
-    });
-  });
+    }),
+  );
 }
 
 const { canopy, manufacturer } = Astro.props;

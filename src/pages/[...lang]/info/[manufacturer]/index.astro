@@ -1,31 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
 
-import { languages, showDefaultLang, defaultLang } from '../../../../i18n/ui';
-import { getLangFromUrl, useTranslatedPath } from '../../../../i18n/utils';
+import {
+  buildStaticRoutes,
+  getLangFromUrl,
+  useTranslatedPath,
+} from '../../../../i18n/utils';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
   const manufacturers = await getCollection('manufacturers');
 
-  return Object.keys(languages).flatMap(lang => {
-    return manufacturers.map(manufacturer => {
+  return buildStaticRoutes(
+    manufacturers.map(manufacturer => {
       const filteredCanopies = canopies.filter(
         canopy => canopy.data.manufacturerSlug === manufacturer.id,
       );
-      if (!showDefaultLang && lang === defaultLang) {
-        return {
-          params: { manufacturer: manufacturer.id },
-          props: { manufacturer, filteredCanopies },
-        };
-      }
       return {
-        params: { manufacturer: manufacturer.id, lang },
+        params: { manufacturer: manufacturer.id },
         props: { manufacturer, filteredCanopies },
       };
-    });
-  });
+    }),
+  );
 }
 
 const { manufacturer, filteredCanopies } = Astro.props;
