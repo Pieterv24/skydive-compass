@@ -1,12 +1,5 @@
 import { ui, defaultLang, showDefaultLang, languages } from './ui';
 
-export interface Route {
-  params: {
-    [key: string]: string | undefined;
-  };
-  props?: object;
-}
-
 export function useTranslatedPath(input: keyof typeof ui | URL) {
   const lang = input instanceof URL ? getLangFromUrl(input) : input;
 
@@ -35,7 +28,17 @@ export function t(url: URL) {
   return useTranslations(lang);
 }
 
-export function buildStaticRoutes(routes: Route[] = []): Route[] {
+export type Params = Record<string, string | undefined>;
+export type Props = Record<string, unknown>;
+export interface Route<P extends Params = Params, R extends Props = Props> {
+  params: { [K in keyof P]: P[K] | number };
+  props?: R;
+}
+
+export function buildStaticPaths<
+  P extends Params = Params,
+  R extends Props = Props,
+>(routes: Route<P, R>[] = []) {
   const langRoutes = Object.keys(languages).map(lang => {
     if (!showDefaultLang && lang === defaultLang) {
       return { params: { lang: undefined } };

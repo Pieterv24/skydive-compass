@@ -1,10 +1,10 @@
 ---
-import { useTranslations, buildStaticRoutes } from '../../i18n/utils';
+import { useTranslations, buildStaticPaths } from '../../i18n/utils';
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  return buildStaticRoutes();
+  return buildStaticPaths();
 }
 
 const t = useTranslations(Astro.url);

@@ -4,13 +4,13 @@ import {
   useTranslations,
   getLangFromUrl,
   useTranslatedPath,
-  buildStaticRoutes,
+  buildStaticPaths,
 } from '../../../../i18n/utils';
 
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  return buildStaticRoutes();
+  return buildStaticPaths();
 }
 
 const manufacturers = await getCollection('manufacturers');
