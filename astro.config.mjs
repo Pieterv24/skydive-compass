@@ -7,7 +7,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://static.pieterv24.dev/skydivekompas/', // Ensure a trailing slash is present
+  base: '/',
+  site: 'https://compass.funjump.ing',
   trailingSlash: 'ignore',
   integrations: [react(), sitemap()],
 });

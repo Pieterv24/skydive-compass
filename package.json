@@ -28,6 +28,8 @@
     "@commitlint/cz-commitlint": "^19.8.1",
     "@eslint/js": "^9.32.0",
     "@pandacss/dev": "^0.54.0",
+    "@pandacss/preset-base": "^1.0.0",
+    "@pandacss/preset-panda": "^1.0.0",
     "@types/bun": "^1.2.19",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",

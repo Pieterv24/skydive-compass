@@ -6,7 +6,7 @@ import {
   getLangFromUrl,
   useTranslatedPath,
 } from '../../../../i18n/utils';
-import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PageLayout from '../../../../layouts/PageLayout.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
@@ -30,7 +30,7 @@ const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<BaseLayout pageTitle={manufacturer.data.name}>
+<PageLayout pageTitle={manufacturer.data.name}>
   <ul>
     {
       filteredCanopies.map(canopy => (
@@ -44,4 +44,4 @@ const translatePath = useTranslatedPath(lang);
       ))
     }
   </ul>
-</BaseLayout>
+</PageLayout>

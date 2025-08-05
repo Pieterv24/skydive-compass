@@ -4,11 +4,16 @@ export function useTranslatedPath(input: keyof typeof ui | URL) {
   const lang = input instanceof URL ? getLangFromUrl(input) : input;
 
   return function translatePath(path: string, l: string = lang) {
-    return !showDefaultLang && l === defaultLang ? path : `/${l}${path}`;
+    return !showDefaultLang && l === defaultLang
+      ? path
+      : `${l}/${path}`.replace(/\/{2,}/g, '/');
   };
 }
 
 export function getLangFromUrl(url: URL) {
+  if (import.meta.env.BASE_URL !== '/') {
+    url.pathname = url.pathname.replace(import.meta.env.BASE_URL, '');
+  }
   const [, lang] = url.pathname.split('/');
   if (lang in ui) return lang as keyof typeof ui;
   return defaultLang;

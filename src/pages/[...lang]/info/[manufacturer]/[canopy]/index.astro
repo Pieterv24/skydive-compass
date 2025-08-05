@@ -7,7 +7,7 @@ import {
   useTranslatedPath,
 } from '../../../../../i18n/utils';
 
-import BaseLayout from '../../../../../layouts/BaseLayout.astro';
+import PageLayout from '../../../../../layouts/PageLayout.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
@@ -34,7 +34,7 @@ const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<BaseLayout pageTitle={canopy.data.name}>
+<PageLayout pageTitle={canopy.data.name}>
   <h2>Cells: {canopy.data.cells}</h2>
   <h2>Category: {canopy.data.category}</h2>
   <h3>
@@ -42,4 +42,4 @@ const translatePath = useTranslatedPath(lang);
       >{manufacturer?.data.name}</a
     >
   </h3>
-</BaseLayout>
+</PageLayout>

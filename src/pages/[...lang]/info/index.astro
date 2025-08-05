@@ -1,14 +1,8 @@
 ---
-import { languages, showDefaultLang, defaultLang } from '../../../i18n/ui';
-import { useTranslatedPath } from '../../../i18n/utils';
+import { useTranslatedPath, buildStaticPaths } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
-  return Object.keys(languages).map(lang => {
-    if (!showDefaultLang && lang === defaultLang) {
-      return { params: { lang: undefined } };
-    }
-    return { params: { lang } };
-  });
+  return buildStaticPaths();
 }
 
 const translatePath = useTranslatedPath(Astro.url);

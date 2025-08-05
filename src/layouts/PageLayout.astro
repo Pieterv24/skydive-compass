@@ -1,0 +1,11 @@
+---
+import Navigation from '../components/Navigation.astro';
+import BaseLayout from './BaseLayout.astro';
+
+const { pageTitle } = Astro.props;
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <Navigation />
+  <h1>{pageTitle}</h1>
+</BaseLayout>

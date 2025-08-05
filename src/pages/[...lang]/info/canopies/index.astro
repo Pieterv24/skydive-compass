@@ -7,7 +7,7 @@ import {
   buildStaticPaths,
 } from '../../../../i18n/utils';
 
-import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PageLayout from '../../../../layouts/PageLayout.astro';
 
 export async function getStaticPaths() {
   return buildStaticPaths();
@@ -22,7 +22,7 @@ const translatePath = useTranslatedPath(lang);
 const pageTitle = t('nav.canopies');
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<PageLayout pageTitle={pageTitle}>
   <ul>
     {
       canopies.map(canopy => (
@@ -38,4 +38,4 @@ const pageTitle = t('nav.canopies');
       ))
     }
   </ul>
-</BaseLayout>
+</PageLayout>
