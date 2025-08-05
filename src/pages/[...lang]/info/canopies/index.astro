@@ -1,13 +1,13 @@
 ---
-import { languages, showDefaultLang, defaultLang } from '../../../i18n/ui';
+import { getCollection } from 'astro:content';
+import { languages, showDefaultLang, defaultLang } from '../../../../i18n/ui';
 import {
   useTranslations,
   getLangFromUrl,
   useTranslatedPath,
-} from '../../../i18n/utils';
+} from '../../../../i18n/utils';
 
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import canopies from '../../../data/canopies.json';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   return Object.keys(languages).map(lang => {
@@ -17,6 +17,8 @@ export async function getStaticPaths() {
     return { params: { lang } };
   });
 }
+
+const canopies = await getCollection('canopies');
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -30,7 +32,13 @@ const pageTitle = t('nav.canopies');
     {
       canopies.map(canopy => (
         <li>
-          <a href={translatePath(`/canopies/${canopy.id}`)}>{canopy.name}</a>
+          <a
+            href={translatePath(
+              `/info/${canopy.data.manufacturerSlug}/${canopy.data.slug}`,
+            )}
+          >
+            {canopy.data.name}
+          </a>
         </li>
       ))
     }

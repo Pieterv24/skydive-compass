@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 
-import { languages, showDefaultLang, defaultLang } from '../../../i18n/ui';
-import { getLangFromUrl, useTranslatedPath } from '../../../i18n/utils';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { languages, showDefaultLang, defaultLang } from '../../../../i18n/ui';
+import { getLangFromUrl, useTranslatedPath } from '../../../../i18n/utils';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
@@ -38,7 +38,9 @@ const translatePath = useTranslatedPath(lang);
     {
       filteredCanopies.map(canopy => (
         <li>
-          <a href={translatePath(`/canopies/${manufacturer.id}-${canopy.id}`)}>
+          <a
+            href={translatePath(`/info/${manufacturer.id}/${canopy.data.slug}`)}
+          >
             {canopy.data.name}
           </a>
         </li>

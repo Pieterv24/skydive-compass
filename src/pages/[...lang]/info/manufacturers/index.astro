@@ -1,14 +1,13 @@
 ---
-import { languages, showDefaultLang, defaultLang } from '../../../i18n/ui';
+import { getCollection } from 'astro:content';
+import { languages, showDefaultLang, defaultLang } from '../../../../i18n/ui';
 import {
   useTranslations,
   getLangFromUrl,
   useTranslatedPath,
-} from '../../../i18n/utils';
+} from '../../../../i18n/utils';
 
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-
-import manufacturers from '../../../data/manufacturers.json';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   return Object.keys(languages).map(lang => {
@@ -18,6 +17,8 @@ export async function getStaticPaths() {
     return { params: { lang } };
   });
 }
+
+const manufacturers = await getCollection('manufacturers');
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -31,8 +32,8 @@ const pageTitle = t('nav.manufacturers');
     {
       manufacturers.map(manufacturer => (
         <li>
-          <a href={translatePath(`/manufacturers/${manufacturer.id}`)}>
-            {manufacturer.name}
+          <a href={translatePath(`/info/${manufacturer.id}`)}>
+            {manufacturer.data.name}
           </a>
         </li>
       ))
