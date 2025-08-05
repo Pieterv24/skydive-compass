@@ -1,25 +1,28 @@
 ---
+import { getCollection } from 'astro:content';
+
 import { languages, showDefaultLang, defaultLang } from '../../../i18n/ui';
 import { getLangFromUrl, useTranslatedPath } from '../../../i18n/utils';
 
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import canopies from '../../../data/canopies.json';
-import manufacturers from '../../../data/manufacturers.json';
 
 export async function getStaticPaths() {
+  const canopies = await getCollection('canopies');
+  const manufacturers = await getCollection('manufacturers');
+
   return Object.keys(languages).flatMap(lang => {
-    return canopies.map(canopy => {
-      const manufacturer = manufacturers.filter(
-        entry => entry.id === canopy.manufacturerid,
-      )[0];
+    return canopies.map(({ data: canopy }) => {
+      const manufacturer = manufacturers.find(
+        m => m.id === canopy.manufacturerSlug,
+      )?.data || { slug: '', name: '' };
       if (!showDefaultLang && lang === defaultLang) {
         return {
-          params: { canopy: canopy.id },
+          params: { canopy: `${manufacturer.slug}-${canopy.slug}` },
           props: { canopy, manufacturer },
         };
       }
       return {
-        params: { canopy: canopy.id, lang },
+        params: { canopy: `${manufacturer.slug}-${canopy.slug}`, lang },
         props: { canopy, manufacturer },
       };
     });
@@ -35,7 +38,7 @@ const translatePath = useTranslatedPath(lang);
   <h2>Cells: {canopy.cells}</h2>
   <h2>Category: {canopy.category}</h2>
   <h3>
-    Manufacturer: <a href={translatePath(`/manufacturers/${manufacturer.id}`)}
+    Manufacturer: <a href={translatePath(`/manufacturers/${manufacturer.slug}`)}
       >{manufacturer.name}</a
     >
   </h3>
