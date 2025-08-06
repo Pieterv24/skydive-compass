@@ -5,9 +5,9 @@ import {
   buildStaticPaths,
   getLangFromUrl,
   useTranslatedPath,
-} from '../../../../../i18n/utils';
+} from '@i18n/utils';
 
-import PageLayout from '../../../../../layouts/PageLayout.astro';
+import PageLayout from '@layouts/PageLayout.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');

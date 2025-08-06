@@ -1,0 +1,65 @@
+---
+import { css } from '@panda/css';
+import { grid } from '@panda/patterns';
+
+import ThemeIcon from './ThemeIcon.astro';
+
+import { useTranslations } from '@i18n/utils';
+import Navigation from './Navigation.astro';
+
+const t = useTranslations(Astro.url);
+---
+
+<div
+  class={grid({
+    backgroundColor: 'background',
+    columns: { base: 2, md: 3 },
+    alignItems: 'center',
+    paddingY: '4',
+    paddingX: '8',
+    gap: '4',
+  })}
+>
+  <div
+    class={css({
+      display: 'flex',
+      gap: '2',
+      alignItems: 'center',
+    })}
+  >
+    <img
+      src="cropped_alti_compass.png"
+      alt="Skydive Compass Logo"
+      class={css({ width: '8', height: 'auto' })}
+    />
+    <h1 class={css({ fontSize: 'xl' })}>{t('site.title')}</h1>
+  </div>
+  <div
+    class={css({
+      display: { base: 'block', md: 'none' },
+      justifySelf: 'flex-end',
+      gridColumn: 2,
+    })}
+  >
+    <h1>Ham</h1>
+  </div>
+  <div
+    class={grid({
+      columns: { base: 1, md: 3 },
+      textAlign: 'center',
+      display: { base: 'none', md: 'grid' },
+      gridColumn: { base: 'span 2', md: 'auto' },
+    })}
+  >
+    <Navigation />
+  </div>
+  <div
+    class={css({
+      justifySelf: { base: 'start', md: 'end' },
+      // display: { base: 'none', md: 'block'},
+      gridColumn: { base: 'span 2', md: 'auto' },
+    })}
+  >
+    <ThemeIcon />
+  </div>
+</div>

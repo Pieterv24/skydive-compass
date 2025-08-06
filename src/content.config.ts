@@ -1,7 +1,8 @@
 import { defineCollection, z } from 'astro:content';
 import { file } from 'astro/loaders';
-import type { Manufacturer } from './models/Manufacturer';
-import type { Canopy } from './models/Canopy';
+
+import type { Manufacturer } from '@models/Manufacturer';
+import type { Canopy } from '@models/Canopy';
 
 const manufacturers = defineCollection({
   loader: file('src/data/manufacturers.json', {

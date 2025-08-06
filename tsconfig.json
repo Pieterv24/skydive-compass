@@ -3,9 +3,21 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
+    "types": ["bun/types"],
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "allowJs": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "paths": {
+      "~/*": ["./src/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@data/*": ["./src/data/*"],
+      "@components/*": ["./src/components/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@models/*": ["./src/models/*"],
+      "@panda/*": ["./styled-system/*"]
+    }
   }
 }

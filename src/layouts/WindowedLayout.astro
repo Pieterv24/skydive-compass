@@ -1,0 +1,27 @@
+---
+import { css } from '@panda/css';
+---
+
+<div
+  class={css({
+    width: 'full',
+    height: 'fit-content',
+    backgroundColor: 'background',
+    flexGrow: 1,
+    display: 'flex',
+  })}
+>
+  <div
+    class={css({
+      width: 'full',
+      backgroundColor: 'background_card',
+      flexGrow: 1,
+      marginX: { base: '0', md: '4', '2xl': '8' },
+      roundedTop: '4xl',
+      paddingTop: '4',
+      shadow: { base: 'none', md: 'sm_window_shadow' },
+    })}
+  >
+    <slot />
+  </div>
+</div>

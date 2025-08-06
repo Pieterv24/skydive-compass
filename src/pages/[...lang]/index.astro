@@ -1,7 +1,7 @@
 ---
-import { useTranslations, buildStaticPaths } from '../../i18n/utils';
+import { useTranslations, buildStaticPaths } from '@i18n/utils';
 
-import PageLayout from '../../layouts/PageLayout.astro';
+import PageLayout from '@layouts/PageLayout.astro';
 
 export async function getStaticPaths() {
   return buildStaticPaths();
@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 
 const t = useTranslations(Astro.url);
 
-const pageTitle = t('site.title');
+const pageTitle = t('nav.compass');
 ---
 
 <PageLayout pageTitle={pageTitle} />
