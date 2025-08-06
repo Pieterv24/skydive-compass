@@ -1,6 +1,4 @@
 ---
-import { panda, Grid } from '@panda/jsx';
-
 import ThemeSelector from './ThemeSelector.astro';
 
 import { useTranslations } from '@i18n/utils';
@@ -9,43 +7,28 @@ import Navigation from './Navigation.astro';
 const t = useTranslations(Astro.url);
 ---
 
-<Grid
-  backgroundColor="background"
-  columns={{ base: 2, md: 3 }}
-  alignItems="center"
-  paddingY="4"
-  paddingX="8"
-  gap="4"
+<div
+  class="grid grid-cols-2 items-center gap-4 bg-gray-50 px-8 py-4 md:grid-cols-3 dark:bg-gray-950"
 >
-  <panda.div display="flex" gap="2" alignItems="center">
-    <panda.img
+  <div class="flex items-center gap-2">
+    <img
+      class="h-auto w-8"
       src="cropped_alti_compass.png"
       alt="Skydive Compass Logo"
-      width="8"
-      height="auto"
     />
-    <panda.h1 fontSize="xl">{t('site.title')}</panda.h1>
-  </panda.div>
-  <panda.div
-    display={{ base: 'block', md: 'none' }}
-    justifySelf="flex-end"
-    gridColumn="2"
-  >
+    <h1 class="text-xl text-black dark:text-white">{t('site.title')}</h1>
+  </div>
+  <div class="col-2 block justify-end md:hidden">
     <h1>Ham</h1>
-  </panda.div>
-  <Grid
-    columns={{ base: 1, md: 3 }}
-    textAlign="center"
-    display={{ base: 'none', md: 'grid' }}
-    gridColumn={{ base: 'span 2', md: 'auto' }}
+  </div>
+  <div
+    class="col-span-2 hidden grid-cols-1 text-center md:col-auto md:grid md:grid-cols-3"
   >
     <Navigation />
-  </Grid>
-  <panda.div
-    justifySelf={{ base: 'start', md: 'end' }}
-    display={{ base: 'none', md: 'block' }}
-    gridColumn={{ base: 'span 2', md: 'auto' }}
+  </div>
+  <div
+    class="col-span-2 hidden justify-self-start md:col-auto md:block md:justify-self-end"
   >
     <ThemeSelector />
-  </panda.div>
-</Grid>
+  </div>
+</div>

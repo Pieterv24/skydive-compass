@@ -1,6 +1,4 @@
 ---
-import { panda, Center } from '@panda/jsx';
-
 import BaseLayout from './BaseLayout.astro';
 import TopBar from '~/components/TopBar.astro';
 import WindowedLayout from './WindowedLayout.astro';
@@ -11,11 +9,9 @@ const { pageTitle } = Astro.props;
 <BaseLayout pageTitle={pageTitle}>
   <TopBar />
   <WindowedLayout>
-    <Center>
-      <panda.h1 fontFamily="heading" fontSize="4xl">
-        {pageTitle}
-      </panda.h1>
-    </Center>
+    <h1 class="items-center text-center text-4xl text-black dark:text-white">
+      {pageTitle}
+    </h1>
     <slot />
   </WindowedLayout>
 </BaseLayout>
