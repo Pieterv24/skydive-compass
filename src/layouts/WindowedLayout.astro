@@ -1,27 +1,23 @@
 ---
-import { css } from '@panda/css';
+import { panda } from '@panda/jsx';
 ---
 
-<div
-  class={css({
-    width: 'full',
-    height: 'fit-content',
-    backgroundColor: 'background',
-    flexGrow: 1,
-    display: 'flex',
-  })}
+<panda.div
+  width="full"
+  height="fit-content"
+  backgroundColor="background"
+  flexGrow="1"
+  display="flex"
 >
-  <div
-    class={css({
-      width: 'full',
-      backgroundColor: 'background_card',
-      flexGrow: 1,
-      marginX: { base: '0', md: '4', '2xl': '8' },
-      roundedTop: '4xl',
-      paddingTop: '4',
-      shadow: { base: 'none', md: 'sm_window_shadow' },
-    })}
+  <panda.div
+    width="full"
+    backgroundColor="background_card"
+    flexGrow="1"
+    roundedTop="4xl"
+    paddingTop="4"
+    marginX={{ base: '0', md: '4', '2xl': '8' }}
+    shadow={{ base: 'none', md: 'sm_window_shadow' }}
   >
     <slot />
-  </div>
-</div>
+  </panda.div>
+</panda.div>

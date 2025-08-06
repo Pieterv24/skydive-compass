@@ -1,5 +1,5 @@
 ---
-import { center } from '@panda/patterns';
+import { panda, Center } from '@panda/jsx';
 
 import BaseLayout from './BaseLayout.astro';
 import TopBar from '~/components/TopBar.astro';
@@ -11,14 +11,11 @@ const { pageTitle } = Astro.props;
 <BaseLayout pageTitle={pageTitle}>
   <TopBar />
   <WindowedLayout>
-    <h1
-      class={center({
-        fontFamily: 'heading',
-        fontSize: '4xl',
-      })}
-    >
-      {pageTitle}
-    </h1>
+    <Center>
+      <panda.h1 fontFamily="heading" fontSize="4xl">
+        {pageTitle}
+      </panda.h1>
+    </Center>
     <slot />
   </WindowedLayout>
 </BaseLayout>
