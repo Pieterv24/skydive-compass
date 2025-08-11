@@ -37,42 +37,8 @@
   </div>
 </div>
 
-<script is:inline>
-  const getTheme = () => {
-    const localStorageTheme = localStorage?.getItem('theme') ?? '';
-    if (['dark', 'light'].includes(localStorageTheme)) {
-      return localStorageTheme;
-    }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  };
-
-  const theme = getTheme();
-  if (theme === 'light') {
-    document.documentElement.classList.remove('dark');
-  } else {
-    document.documentElement.classList.add('dark');
-  }
-
-  window.localStorage.setItem('theme', theme);
-
-  const setTheme = selectedTheme => {
-    if (selectedTheme === 'system') {
-      localStorage.removeItem('theme');
-    } else {
-      localStorage.setItem('theme', selectedTheme);
-    }
-
-    const isDark = getTheme() === 'dark';
-    const documentRoot = document.documentElement;
-    if (documentRoot.classList.contains('dark') && !isDark) {
-      documentRoot.classList.remove('dark');
-    } else if (!documentRoot.classList.contains('dark') && isDark) {
-      documentRoot.classList.add('dark');
-    }
-  };
+<script>
+  import { setTheme } from '@utils/darkMode';
 
   document
     .getElementById('setSystem')

@@ -10,7 +10,7 @@ export function useTranslatedPath(input: keyof typeof ui | URL) {
   };
 }
 
-export function getLangFromUrl(url: URL) {
+export function getLangFromUrl(url: URL | Location) {
   if (import.meta.env.BASE_URL !== '/') {
     url.pathname = url.pathname.replace(import.meta.env.BASE_URL, '');
   }
@@ -19,7 +19,7 @@ export function getLangFromUrl(url: URL) {
   return defaultLang;
 }
 
-export function getUrlWithoutLang(url: URL) {
+export function getUrlWithoutLang(url: URL | Location) {
   if (import.meta.env.BASE_URL !== '/') {
     url.pathname = url.pathname.replace(import.meta.env.BASE_URL, '');
   }
@@ -75,4 +75,21 @@ export function buildStaticPaths<
       };
     });
   });
+}
+
+export function setLanguage(language: keyof typeof languages) {
+  window.localStorage.setItem('language', language);
+}
+
+export function getUserPreferedLanguage(): keyof typeof languages {
+  const userLanguages = navigator.languages;
+  const supportedLanguages = Object.keys(languages);
+
+  return (
+    (userLanguages
+      .map(lang => lang.split('-')[0])
+      .filter(lang => {
+        return supportedLanguages.includes(lang);
+      })[0] as keyof typeof languages) ?? defaultLang
+  );
 }

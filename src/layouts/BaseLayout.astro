@@ -20,8 +20,31 @@ const lang = getLangFromUrl(Astro.url) ?? defaultLang;
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
+    <script is:inline>
+      // Prevent FART (Flash of inAccurate coloR Theme)
+      const userPrefersDark = window.matchMedia(
+        '(prefers-color-scheme: dark)',
+      ).matches;
+      const darkTheme =
+        localStorage.getItem('theme') || (userPrefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('theme', darkTheme);
+    </script>
   </head>
   <body class="bg-base text-bw flex min-h-screen flex-col">
     <slot />
+    <script>
+      // import { getUserPreferedLanguage, getLangFromUrl, useTranslatedPath, getUrlWithoutLang } from '@i18n/utils';
+
+      // const userPreferedLanguage = getUserPreferedLanguage();
+      // const currentLanguage = getLangFromUrl(window.location);
+
+      // if (userPreferedLanguage !== currentLanguage) {
+      //   const translatePath = useTranslatedPath(userPreferedLanguage);
+      //   const currentPath = getUrlWithoutLang(window.location);
+
+      // window.location.replace(translatePath(currentPath));
+      // TODO: Popup to ask user if they want to switch ot their prefered language
+      // }
+    </script>
   </body>
 </html>

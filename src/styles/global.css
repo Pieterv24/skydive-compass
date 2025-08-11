@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where([theme='dark'], [theme='dark'] *));
 
 :root {
   --primary: var(--color-sky-500);
