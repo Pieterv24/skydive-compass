@@ -1,0 +1,41 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  getUrlWithoutLang,
+} from '@i18n/utils';
+import { languages } from '~/i18n/ui';
+
+const language = getLangFromUrl(Astro.url);
+const languageList = Object.keys(languages);
+---
+
+<div class="group/toggle relative cursor-pointer">
+  <button
+    id="themeToggle"
+    class="group/button border-primary hover:bg-primary active:border-secondary flex h-9 w-9 cursor-pointer items-center justify-center justify-items-center rounded-xl border-2"
+  >
+    <p
+      class="text-primary group-active/button:text-secondary group-hover/button:text-base"
+    >
+      {language}
+    </p>
+  </button>
+  <div
+    class="text-bw bg-bw-inverse absolute right-0 z-10 mt-2 hidden rounded-md shadow-md group-focus-within/toggle:block"
+  >
+    <ul
+      class="*:px-2 *:py-1 *:select-none *:first:rounded-t-md *:last:rounded-b-md *:hover:bg-black/5 *:active:bg-black/20 *:dark:hover:bg-white/20 *:dark:active:bg-white/35"
+    >
+      {
+        languageList.map(key => (
+          <li>
+            <a href={useTranslatedPath(key)(getUrlWithoutLang(Astro.url))}>
+              {languages[key]}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

@@ -17,8 +17,7 @@
       "@components/*": ["./src/components/*"],
       "@styles/*": ["./src/styles/*"],
       "@i18n/*": ["./src/i18n/*"],
-      "@models/*": ["./src/models/*"],
-      "@panda/*": ["./styled-system/*"]
+      "@models/*": ["./src/models/*"]
     }
   }
 }

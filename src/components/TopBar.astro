@@ -1,34 +1,35 @@
 ---
 import ThemeSelector from './ThemeSelector.astro';
+import LanguageSelector from './LanguageSelector.astro';
 
-import { useTranslations } from '@i18n/utils';
+import { useTranslations, useTranslatedPath } from '@i18n/utils';
 import Navigation from './Navigation.astro';
 
+const translatePath = useTranslatedPath(Astro.url);
 const t = useTranslations(Astro.url);
 ---
 
 <div
-  class="grid grid-cols-2 items-center gap-4 bg-gray-50 px-8 py-4 md:grid-cols-3 dark:bg-gray-950"
+  class="bg-base grid grid-cols-2 items-center gap-4 px-8 py-4 md:grid-cols-3"
 >
-  <div class="flex items-center gap-2">
-    <img
-      class="h-auto w-8"
-      src="cropped_alti_compass.png"
-      alt="Skydive Compass Logo"
-    />
-    <h1 class="text-xl text-black dark:text-white">{t('site.title')}</h1>
-  </div>
+  <a href={translatePath('')}>
+    <div class="flex items-center gap-2">
+      <img
+        class="h-auto w-8"
+        src="cropped_alti_compass.png"
+        alt="Skydive Compass Logo"
+      />
+      <h1 class="text-xl">{t('site.title')}</h1>
+    </div>
+  </a>
   <div class="col-2 block justify-end md:hidden">
     <h1>Ham</h1>
   </div>
+  <Navigation />
   <div
-    class="col-span-2 hidden grid-cols-1 text-center md:col-auto md:grid md:grid-cols-3"
+    class="col-span-2 hidden grid-cols-2 gap-2 justify-self-start md:col-auto md:grid md:justify-self-end"
   >
-    <Navigation />
-  </div>
-  <div
-    class="col-span-2 hidden justify-self-start md:col-auto md:block md:justify-self-end"
-  >
+    <LanguageSelector />
     <ThemeSelector />
   </div>
 </div>

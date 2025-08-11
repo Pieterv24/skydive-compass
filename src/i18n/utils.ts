@@ -19,6 +19,16 @@ export function getLangFromUrl(url: URL) {
   return defaultLang;
 }
 
+export function getUrlWithoutLang(url: URL) {
+  if (import.meta.env.BASE_URL !== '/') {
+    url.pathname = url.pathname.replace(import.meta.env.BASE_URL, '');
+  }
+
+  const [, lang, ...rest] = url.pathname.split('/');
+  if (lang in ui) return rest.join('/');
+  return url.pathname;
+}
+
 export function useTranslations(input: keyof typeof ui | URL) {
   const lang = input instanceof URL ? getLangFromUrl(input) : input;
 
@@ -44,9 +54,9 @@ export function buildStaticPaths<
   P extends Params = Params,
   R extends Props = Props,
 >(routes: Route<P, R>[] = []) {
-  const langRoutes = Object.keys(languages).map(lang => {
+  const langRoutes = Object.keys(languages).flatMap(lang => {
     if (!showDefaultLang && lang === defaultLang) {
-      return { params: { lang: undefined } };
+      return [{ params: { lang: undefined } }, { params: { lang } }];
     }
     return { params: { lang } };
   });
