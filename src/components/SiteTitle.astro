@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+
+import { useTranslations, useTranslatedPath } from '@i18n/utils';
+
+import logoImg from '@assets/cropped_alti_compass.png';
+
+const translatePath = useTranslatedPath(Astro.url);
+const t = useTranslations(Astro.url);
+
+const { class: className } = Astro.props;
+---
+
+<a href={translatePath('./')} class={`${className}`}>
+  <div class="flex items-center gap-2">
+    <Image
+      class="h-auto w-8"
+      src={logoImg}
+      alt="Skydive Compass Logo"
+      loading="eager"
+    />
+    <h1 class="text-xl">{t('site.title')}</h1>
+  </div>
+</a>

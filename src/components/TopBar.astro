@@ -1,35 +1,25 @@
 ---
 import ThemeSelector from './ThemeSelector.astro';
+// import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector.astro';
+import SiteTitle from './SiteTitle.astro';
+import Hamburger from './Hambuger.astro';
 
-import { useTranslations, useTranslatedPath } from '@i18n/utils';
 import Navigation from './Navigation.astro';
-
-const translatePath = useTranslatedPath(Astro.url);
-const t = useTranslations(Astro.url);
 ---
 
 <div
   class="bg-base grid grid-cols-2 items-center gap-4 px-8 py-4 md:grid-cols-3"
 >
-  <a href={translatePath('')}>
-    <div class="flex items-center gap-2">
-      <img
-        class="h-auto w-8"
-        src="cropped_alti_compass.png"
-        alt="Skydive Compass Logo"
-      />
-      <h1 class="text-xl">{t('site.title')}</h1>
-    </div>
-  </a>
-  <div class="col-2 block justify-end md:hidden">
-    <h1>Ham</h1>
-  </div>
-  <Navigation />
+  <SiteTitle />
+  <!-- <div class="col-2 block md:hidden justify-end flex"> -->
+  <Hamburger class="col-2 block justify-self-end md:hidden" />
+  <Navigation class="col-span-2 grid md:col-span-1 md:grid" />
   <div
-    class="col-span-2 hidden grid-cols-2 gap-2 justify-self-start md:col-auto md:grid md:justify-self-end"
+    class="col-span-2 grid grid-cols-2 justify-end gap-2 justify-self-start md:col-auto md:grid md:justify-self-end"
   >
     <LanguageSelector />
+    <!-- <ThemeSelector client:only="react" /> -->
     <ThemeSelector />
   </div>
 </div>

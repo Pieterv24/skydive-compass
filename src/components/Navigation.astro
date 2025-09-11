@@ -8,12 +8,14 @@ import {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
+
+const { class: className } = Astro.props;
 ---
 
 <div
-  class="*:hover:text-primary *:active:text-secondary col-span-2 hidden grid-cols-1 text-center md:col-auto md:grid md:grid-cols-3"
+  class={`*:w-min *:hover:text-primary *:active:text-secondary justify-items-center ${className}`}
 >
-  <a href={translatePath('')}>{t('nav.compass')}</a>
+  <a href={translatePath('./')}>{t('nav.compass')}</a>
   <a href={translatePath('info/canopies')}>{t('nav.canopies')}</a>
   <a href={translatePath('info/manufacturers')}>{t('nav.manufacturers')}</a>
 </div>
