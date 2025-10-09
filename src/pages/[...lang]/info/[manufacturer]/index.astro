@@ -7,6 +7,8 @@ import {
   useTranslatedPath,
 } from '../../../../i18n/utils';
 import PageLayout from '../../../../layouts/PageLayout.astro';
+import ListCard from '~/components/ListCard.astro';
+import ListCardTag from '~/components/ListCardTag.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
@@ -31,17 +33,55 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <PageLayout pageTitle={manufacturer.data.name}>
-  <ul>
+  <section
+    class="bg-base-lighter border-base-lighter mx-2 mb-8 rounded-2xl border px-6 py-4 sm:mx-4 md:mx-8"
+  >
+    <h2 class="text-bw mb-2 text-2xl font-bold">{manufacturer.data.name}</h2>
+    <div class="mb-2 flex flex-wrap items-center gap-4">
+      {
+        manufacturer.data.countrycode && (
+          <ListCardTag>
+            {manufacturer.data.countrycode.toUpperCase()}
+          </ListCardTag>
+        )
+      }
+      {
+        manufacturer.data.url && (
+          <a
+            href={manufacturer.data.url}
+            target="_blank"
+            rel="noopener"
+            class="text-primary text-sm underline"
+          >
+            Website
+          </a>
+        )
+      }
+    </div>
+    {
+      manufacturer.data.remarks && (
+        <p class="text-bw/80 mb-1 text-xs italic">
+          {manufacturer.data.remarks[lang] || manufacturer.data.remarks.en}
+        </p>
+      )
+    }
+  </section>
+  <h3 class="text-bw mb-4 px-2 text-xl font-semibold sm:px-4 md:px-8">
+    Canopies by {manufacturer.data.name}
+  </h3>
+  <div
+    class="grid grid-cols-1 gap-8 px-2 sm:grid-cols-2 sm:px-4 md:grid-cols-3 md:px-8"
+  >
     {
       filteredCanopies.map(canopy => (
-        <li>
-          <a
-            href={translatePath(`/info/${manufacturer.id}/${canopy.data.slug}`)}
-          >
-            {canopy.data.name}
-          </a>
-        </li>
+        <ListCard
+          href={translatePath(`/info/${manufacturer.id}/${canopy.data.slug}`)}
+          title={canopy.data.name}
+        >
+          <ListCardTag>Cells: {canopy.data.cells}</ListCardTag>
+          <ListCardTag>Category: {canopy.data.category}</ListCardTag>
+        </ListCard>
       ))
     }
-  </ul>
+  </div>
 </PageLayout>

@@ -8,6 +8,8 @@ import {
 } from '@i18n/utils';
 
 import PageLayout from '@layouts/PageLayout.astro';
+import ListCard from '~/components/ListCard.astro';
+import ListCardTag from '~/components/ListCardTag.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
@@ -35,11 +37,101 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <PageLayout pageTitle={canopy.data.name}>
-  <h2>Cells: {canopy.data.cells}</h2>
-  <h2>Category: {canopy.data.category}</h2>
-  <h3>
-    Manufacturer: <a href={translatePath(`/info/${manufacturer?.id}`)}
-      >{manufacturer?.data.name}</a
-    >
-  </h3>
+  <section
+    class="bg-base-lighter border-base-lighter mx-2 mb-8 rounded-2xl border px-6 py-4 sm:mx-4 md:mx-8"
+  >
+    <h2 class="text-bw mb-2 text-2xl font-bold">{canopy.data.name}</h2>
+    <div class="mb-2 flex flex-wrap items-center gap-2">
+      <ListCardTag>Cells: {canopy.data.cells}</ListCardTag>
+      <ListCardTag>Category: {canopy.data.category}</ListCardTag>
+      {
+        canopy.data.firstYearOfProduction && (
+          <ListCardTag>
+            First produced: {canopy.data.firstYearOfProduction}
+          </ListCardTag>
+        )
+      }
+      {
+        canopy.data.lastYearOfProduction && (
+          <ListCardTag>
+            Last produced: {canopy.data.lastYearOfProduction}
+          </ListCardTag>
+        )
+      }
+      {
+        canopy.data.minSize && (
+          <ListCardTag>Min size: {canopy.data.minSize} sqft</ListCardTag>
+        )
+      }
+      {
+        canopy.data.maxSize && (
+          <ListCardTag>Max size: {canopy.data.maxSize} sqft</ListCardTag>
+        )
+      }
+      <ListCardTag>X-Braced: {canopy.data.xBraced ? 'Yes' : 'No'}</ListCardTag>
+      <ListCardTag>Common: {canopy.data.common ? 'Yes' : 'No'}</ListCardTag>
+    </div>
+    {
+      canopy.data.url && (
+        <p class="mb-1 text-sm">
+          <a
+            href={canopy.data.url}
+            target="_blank"
+            rel="noopener"
+            class="text-primary underline"
+          >
+            Product page
+          </a>
+        </p>
+      )
+    }
+    {
+      canopy.data.links && canopy.data.links.length > 0 && (
+        <div class="mt-2">
+          <h4 class="text-bw mb-1 text-sm font-semibold">Links:</h4>
+          <ul class="ml-4 list-disc">
+            {canopy.data.links.map(link => (
+              <li>
+                {link.type === 'youtube' ? (
+                  <a
+                    href={`https://youtube.com/watch?v=${link.id}`}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-primary underline"
+                  >
+                    {link.title}
+                  </a>
+                ) : (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-primary underline"
+                  >
+                    {link.title}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </section>
+  <ListCard
+    href={translatePath(`/info/${manufacturer?.id}`)}
+    title={manufacturer?.data.name}
+    class="mx-2 mb-8 sm:mx-4 md:mx-8"
+  >
+    {
+      manufacturer?.data.countrycode && (
+        <ListCardTag>{manufacturer.data.countrycode.toUpperCase()}</ListCardTag>
+      )
+    }
+    {
+      manufacturer?.data.url && (
+        <ListCardTag class="text-primary underline">Website</ListCardTag>
+      )
+    }
+  </ListCard>
 </PageLayout>
