@@ -12,8 +12,12 @@ const languageList = Object.keys(languages);
 
 <div class="group/toggle relative cursor-pointer">
   <button
-    id="themeToggle"
+    id="languageToggle"
     class="group/button border-primary hover:bg-primary active:border-secondary flex h-9 w-9 cursor-pointer items-center justify-center justify-items-center rounded-xl border-2"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-controls="languageDropdown"
+    aria-label="Language selector. Choose your language."
   >
     <p
       class="text-primary group-active/button:text-secondary group-hover/button:text-base"
@@ -22,14 +26,17 @@ const languageList = Object.keys(languages);
     </p>
   </button>
   <div
-    class="text-bw bg-bw-inverse absolute right-0 z-10 mt-2 hidden rounded-md shadow-md group-focus-within/toggle:block"
+    id="languageDropdown"
+    class="text-bw bg-bw-inverse absolute z-10 mt-2 hidden rounded-md shadow-md"
+    role="listbox"
+    aria-label="Language options"
   >
     <ul
       class="*:px-2 *:py-1 *:select-none *:first:rounded-t-md *:last:rounded-b-md *:hover:bg-black/5 *:active:bg-black/20 *:dark:hover:bg-white/20 *:dark:active:bg-white/35"
     >
       {
         languageList.map(key => (
-          <li>
+          <li role="option" aria-label={languages[key]} tabindex="0">
             <a href={useTranslatedPath(key)(getUrlWithoutLang(Astro.url))}>
               {languages[key]}
             </a>
@@ -39,3 +46,51 @@ const languageList = Object.keys(languages);
     </ul>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('languageToggle');
+    const dropdown = document.getElementById('languageDropdown');
+    function closeDropdown() {
+      if (dropdown) dropdown.classList.add('hidden');
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+    function openDropdown() {
+      if (dropdown && toggleBtn) {
+        dropdown.classList.remove('left-0', 'right-0');
+        const btnRect = toggleBtn.getBoundingClientRect();
+        const dropdownWidth = 180;
+        if (window.innerWidth - btnRect.right < dropdownWidth) {
+          dropdown.classList.add('left-0');
+        } else {
+          dropdown.classList.add('right-0');
+        }
+        dropdown.classList.remove('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      }
+    }
+    if (toggleBtn && dropdown) {
+      toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (dropdown.classList.contains('hidden')) {
+          openDropdown();
+        } else {
+          closeDropdown();
+        }
+      });
+    }
+    // Close dropdown on outside click
+    document.addEventListener('click', function (e) {
+      if (
+        toggleBtn &&
+        e.target instanceof Node &&
+        !toggleBtn.contains(e.target)
+      ) {
+        closeDropdown();
+      }
+    });
+    // Close dropdown after selection
+    dropdown?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', closeDropdown);
+    });
+  });
+</script>

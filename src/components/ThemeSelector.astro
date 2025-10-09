@@ -6,6 +6,10 @@
   <button
     id="themeToggle"
     class="group/button border-primary hover:bg-primary active:border-secondary flex h-9 w-9 cursor-pointer items-center justify-items-center rounded-xl border-2"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-controls="themeDropdown"
+    aria-label="Theme selector. Choose between system, dark, or light mode."
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,14 +29,23 @@
     </svg>
   </button>
   <div
-    class="text-bw bg-bw-inverse absolute right-0 z-10 mt-2 hidden rounded-md shadow-md group-focus-within/toggle:block"
+    id="themeDropdown"
+    class="text-bw bg-bw-inverse absolute z-10 mt-2 hidden rounded-md shadow-md"
+    role="listbox"
+    aria-label="Theme options"
   >
     <ul
       class="*:px-2 *:py-1 *:select-none *:first:rounded-t-md *:last:rounded-b-md *:hover:bg-black/5 *:active:bg-black/20 *:dark:hover:bg-white/20 *:dark:active:bg-white/35"
     >
-      <li id="setSystem" role="button" tabindex="0">System</li>
-      <li id="setDark" role="button" tabindex="0">Dark</li>
-      <li id="setLight" role="button" tabindex="0">Light</li>
+      <li id="setSystem" role="option" aria-label="System theme" tabindex="0">
+        System
+      </li>
+      <li id="setDark" role="option" aria-label="Dark theme" tabindex="0">
+        Dark
+      </li>
+      <li id="setLight" role="option" aria-label="Light theme" tabindex="0">
+        Light
+      </li>
     </ul>
   </div>
 </div>
@@ -41,14 +54,72 @@
   import { setTheme } from '@utils/darkMode';
 
   document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('themeToggle');
+    const dropdown = document.getElementById('themeDropdown');
+
+    function closeDropdown() {
+      if (dropdown) dropdown.classList.add('hidden');
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    function openDropdown() {
+      if (dropdown && toggleBtn) {
+        // Remove both left-0 and right-0 before setting
+        dropdown.classList.remove('left-0', 'right-0');
+        // Get bounding rect of button
+        const btnRect = toggleBtn.getBoundingClientRect();
+        const dropdownWidth = 180; // estimate or get from CSS
+        if (window.innerWidth - btnRect.right < dropdownWidth) {
+          // Not enough space on right, show left
+          dropdown.classList.add('left-0');
+        } else {
+          // Default: show right
+          dropdown.classList.add('right-0');
+        }
+        dropdown.classList.remove('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    if (toggleBtn && dropdown) {
+      console.log('add listener');
+      console.log(toggleBtn);
+      toggleBtn.addEventListener('click', function (e) {
+        console.log('click');
+        e.stopPropagation();
+        if (dropdown.classList.contains('hidden')) {
+          openDropdown();
+        } else {
+          closeDropdown();
+        }
+      });
+    }
+
+    // Close dropdown on outside click
+    document.addEventListener('click', function (e) {
+      if (
+        toggleBtn &&
+        e.target instanceof Node &&
+        !toggleBtn.contains(e.target)
+      ) {
+        closeDropdown();
+      }
+    });
+
+    // Theme selection
     document
-    .getElementById('setSystem')
-    ?.addEventListener('click', () => setTheme('system'));
-    document
-      .getElementById('setDark')
-      ?.addEventListener('click', () => setTheme('dark'));
-    document
-      .getElementById('setLight')
-      ?.addEventListener('click', () => setTheme('light'));
+      .getElementById('setSystem')
+      ?.addEventListener('click', function () {
+        setTheme('system');
+        closeDropdown();
+      });
+    document.getElementById('setDark')?.addEventListener('click', function () {
+      setTheme('dark');
+      closeDropdown();
+    });
+    document.getElementById('setLight')?.addEventListener('click', function () {
+      setTheme('light');
+      closeDropdown();
+    });
   });
 </script>
