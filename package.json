@@ -12,7 +12,8 @@
     "format": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix && prettier \"**/*.{js,mjs,ts,mts,html,json}\" --write",
     "lint-staged": "lint-staged",
     "commitlint": "commitlint --edit",
-    "commit": "lint-staged && git-cz --no-verify"
+    "commit": "lint-staged && git-cz --no-verify",
+    "prepare": "husky && tessl registry sync"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -30,6 +31,7 @@
     "@commitlint/cz-commitlint": "^19.8.1",
     "@eslint/js": "^9.32.0",
     "@tailwindcss/vite": "^4.1.11",
+    "@tessl/cli": "^0.26.0",
     "@types/bun": "^1.2.19",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",

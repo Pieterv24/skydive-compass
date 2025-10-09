@@ -1,0 +1,23 @@
+{
+  "name": "skydive-compass",
+  "dependencies": {
+    "tessl/npm-astro": {
+      "version": "5.13.0"
+    },
+    "tessl/npm-astrojs--sitemap": {
+      "version": "3.0.0"
+    },
+    "tessl/npm-react": {
+      "version": "19.1.0"
+    },
+    "tessl/npm-react-dom": {
+      "version": "19.1.0"
+    },
+    "tessl/npm-tailwindcss": {
+      "version": "4.1.0"
+    },
+    "tessl/npm-tailwindcss--vite": {
+      "version": "4.1.0"
+    }
+  }
+}
