@@ -13,7 +13,7 @@ const { class: className } = Astro.props;
 ---
 
 <div
-  class={`*:w-min *:hover:text-primary *:active:text-secondary justify-items-center ${className}`}
+  class={`grid grid-cols-1 md:grid-cols-3 *:w-min *:hover:text-primary *:active:text-secondary justify-items-center ${className}`}
 >
   <a href={translatePath('./')}>{t('nav.compass')}</a>
   <a href={translatePath('info/canopies')}>{t('nav.canopies')}</a>

@@ -2,7 +2,6 @@
 const { class: className } = Astro.props;
 ---
 
-<!-- <div class:list={["cursor-pointer", "w-10", "h-10", "*:w-8", "*:h-1", "*:bg-bw", "*:block", "*:mb-1.5", "flex", "flex-col", "items-center", "justify-center", "*:last:mb-0", "hover:*:bg-primary", "active:*:bg-secondary", className]}> -->
 <div
   class={`cursor-pointer w-10 h-10 *:w-8 *:h-1 *:bg-bw *:block *:mb-1.5 flex flex-col items-center justify-center *:last:mb-0 hover:*:bg-primary active:*:bg-secondary ${className}`}
 >

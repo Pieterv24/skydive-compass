@@ -16,11 +16,11 @@
     "prepare": "husky && tessl registry sync"
   },
   "dependencies": {
-    "@astrojs/react": "^4.3.0",
-    "@astrojs/sitemap": "^3.4.2",
+    "@astrojs/react": "4.4.0",
+    "@astrojs/sitemap": "3.6.0",
     "@fontsource-variable/inter": "^5.2.6",
     "@fontsource-variable/lexend": "^5.2.9",
-    "astro": "^5.12.8",
+    "astro": "5.14.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.11"
