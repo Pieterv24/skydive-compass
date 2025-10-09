@@ -9,10 +9,11 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
-const { class: className } = Astro.props;
+const { class: className, id } = Astro.props;
 ---
 
 <div
+  id={id}
   class={`grid grid-cols-1 md:grid-cols-3 *:w-min *:hover:text-primary *:active:text-secondary justify-items-center ${className}`}
 >
   <a href={translatePath('./')}>{t('nav.compass')}</a>

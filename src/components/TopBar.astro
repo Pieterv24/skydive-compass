@@ -1,24 +1,35 @@
 ---
 import ThemeSelector from './ThemeSelector.astro';
-// import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector.astro';
 import SiteTitle from './SiteTitle.astro';
 import Hamburger from './Hambuger.astro';
-
 import Navigation from './Navigation.astro';
 ---
-
-<div
-  class="bg-base grid grid-cols-2 items-center gap-4 px-8 py-4 md:grid-cols-3"
->
+<div class="bg-base grid grid-cols-2 items-center gap-4 px-8 py-4 md:grid-cols-3">
   <SiteTitle />
-  <Hamburger class="col-2 block justify-self-end md:hidden" />
-  <Navigation class="col-span-2 md:col-span-1" />
-  <div
-    class="col-span-2 grid grid-cols-2 justify-end gap-2 justify-self-start md:col-auto md:grid md:justify-self-end"
-  >
+  <Hamburger class="col-2 block justify-self-end md:hidden" id="hamburger-button" />
+  <Navigation class="hamburger-menu col-span-2 md:col-span-1 hidden md:grid" />
+  <div class="hamburger-menu col-span-2 hidden md:grid grid-cols-2 justify-end gap-2 justify-self-start md:col-auto md:grid md:justify-self-end">
     <LanguageSelector />
     <!-- <ThemeSelector client:only="react" /> -->
     <ThemeSelector />
   </div>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+      const hamburger = document.getElementById('hamburger-button');
+      const menu = document.getElementsByClassName('hamburger-menu');
+      if (hamburger && menu) {
+        hamburger.addEventListener('click', function () {
+          Array.from(menu).forEach((navigation) => {
+            if (navigation.classList.contains('hidden')) {
+              navigation.classList.replace('hidden', 'grid');
+            } else {
+              navigation.classList.replace('grid', 'hidden');
+            }
+          });
+        });
+      }
+    });
+  </script>
 </div>
+

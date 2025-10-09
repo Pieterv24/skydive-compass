@@ -40,13 +40,15 @@
 <script>
   import { setTheme } from '@utils/darkMode';
 
-  document
+  document.addEventListener('DOMContentLoaded', function () {
+    document
     .getElementById('setSystem')
     ?.addEventListener('click', () => setTheme('system'));
-  document
-    .getElementById('setDark')
-    ?.addEventListener('click', () => setTheme('dark'));
-  document
-    .getElementById('setLight')
-    ?.addEventListener('click', () => setTheme('light'));
+    document
+      .getElementById('setDark')
+      ?.addEventListener('click', () => setTheme('dark'));
+    document
+      .getElementById('setLight')
+      ?.addEventListener('click', () => setTheme('light'));
+  });
 </script>
