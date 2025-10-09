@@ -8,8 +8,8 @@ import {
 } from '@i18n/utils';
 
 import PageLayout from '@layouts/PageLayout.astro';
-import ListCard from '~/components/ListCard.astro';
-import ListCardTag from '~/components/ListCardTag.astro';
+import ItemCard from '@components/ItemCard.astro';
+import ItemCardTag from '@components/ItemCardTag.astro';
 
 export async function getStaticPaths() {
   return buildStaticPaths();
@@ -30,16 +30,16 @@ const pageTitle = t('nav.manufacturers');
   >
     {
       manufacturers.map(manufacturer => (
-        <ListCard
+        <ItemCard
           href={translatePath(`/info/${manufacturer.id}`)}
           title={manufacturer.data.name}
         >
           {manufacturer.data.countryCode && (
-            <ListCardTag>
+            <ItemCardTag>
               {manufacturer.data.countryCode.toUpperCase()}
-            </ListCardTag>
+            </ItemCardTag>
           )}
-        </ListCard>
+        </ItemCard>
       ))
     }
   </div>

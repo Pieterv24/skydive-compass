@@ -50,7 +50,7 @@ export const ui = {
     'canopy.max-size': 'Maximale maat',
     'canopy.common': 'Gangbaar',
     'canopy.x-braced': 'Crossbraced',
-    'canopy.manufacturer': 'Manufacturer',
+    'canopy.manufacturer': 'Fabrikant',
     'canopy.manufacturer-page': 'Website',
     'canopy.links': 'Links',
     'link.youtube': 'Youtube',

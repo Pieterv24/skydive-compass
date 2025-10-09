@@ -5,10 +5,10 @@ import {
   buildStaticPaths,
   getLangFromUrl,
   useTranslatedPath,
-} from '../../../../i18n/utils';
-import PageLayout from '../../../../layouts/PageLayout.astro';
-import ListCard from '~/components/ListCard.astro';
-import ListCardTag from '~/components/ListCardTag.astro';
+} from '@i18n/utils';
+import PageLayout from '@layouts/PageLayout.astro';
+import ItemCard from '@components/ItemCard.astro';
+import ItemCardTag from '@components/ItemCardTag.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
@@ -39,10 +39,10 @@ const translatePath = useTranslatedPath(lang);
     <h2 class="text-bw mb-2 text-2xl font-bold">{manufacturer.data.name}</h2>
     <div class="mb-2 flex flex-wrap items-center gap-4">
       {
-        manufacturer.data.countrycode && (
-          <ListCardTag>
-            {manufacturer.data.countrycode.toUpperCase()}
-          </ListCardTag>
+        manufacturer.data.countryCode && (
+          <ItemCardTag>
+            {manufacturer.data.countryCode.toUpperCase()}
+          </ItemCardTag>
         )
       }
       {
@@ -74,13 +74,13 @@ const translatePath = useTranslatedPath(lang);
   >
     {
       filteredCanopies.map(canopy => (
-        <ListCard
+        <ItemCard
           href={translatePath(`/info/${manufacturer.id}/${canopy.data.slug}`)}
           title={canopy.data.name}
         >
-          <ListCardTag>Cells: {canopy.data.cells}</ListCardTag>
-          <ListCardTag>Category: {canopy.data.category}</ListCardTag>
-        </ListCard>
+          <ItemCardTag>Cells: {canopy.data.cells}</ItemCardTag>
+          <ItemCardTag>Category: {canopy.data.category}</ItemCardTag>
+        </ItemCard>
       ))
     }
   </div>
