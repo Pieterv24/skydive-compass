@@ -23,19 +23,26 @@ const pageTitle = t('nav.canopies');
 ---
 
 <PageLayout pageTitle={pageTitle}>
-  <ul>
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
     {
       canopies.map(canopy => (
-        <li>
-          <a
-            href={translatePath(
-              `/info/${canopy.data.manufacturerSlug}/${canopy.data.slug}`,
-            )}
-          >
-            {canopy.data.name}
-          </a>
-        </li>
+        <a
+          href={translatePath(
+            `/info/${canopy.data.manufacturerSlug}/${canopy.data.slug}`,
+          )}
+          class="border-base-lighter bg-base shadow-t-sm hover:bg-primary/10 focus:ring-primary block rounded-xl border px-5 py-4 transition-colors focus:ring-2 focus:outline"
+        >
+          <h4 class="text-bw mb-2 text-lg font-bold">{canopy.data.name}</h4>
+          <div class="text-bw mb-1 flex flex-wrap gap-2 text-sm">
+            <span class="bg-base-lighter text-bw rounded px-2 py-1">
+              Cells: {canopy.data.cells}
+            </span>
+            <span class="bg-base-lighter text-bw rounded px-2 py-1">
+              Category: {canopy.data.category}
+            </span>
+          </div>
+        </a>
       ))
     }
-  </ul>
+  </div>
 </PageLayout>

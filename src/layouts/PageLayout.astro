@@ -9,9 +9,6 @@ const { pageTitle } = Astro.props;
 <BaseLayout pageTitle={pageTitle}>
   <TopBar />
   <WindowedLayout>
-    <h1 class="text-bw items-center text-center text-4xl">
-      {pageTitle}
-    </h1>
     <slot />
   </WindowedLayout>
 </BaseLayout>
