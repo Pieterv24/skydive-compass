@@ -1,0 +1,17 @@
+---
+import ListItemEntry from './ListItemEntry.astro';
+import ListItemWrapper from './ListItemWrapper.astro';
+
+const { key, linkUrl, linkName } = Astro.props;
+---
+
+<ListItemWrapper>
+  <ListItemEntry class="font-semibold" value={key} />
+  <a
+    href={linkUrl}
+    target="_blank"
+    rel="noopener"
+    class={`text-bw hover:text-primary active:text-secondary font-semibold underline transition-colors`}
+    >{linkName}</a
+  >
+</ListItemWrapper>

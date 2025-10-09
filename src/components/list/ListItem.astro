@@ -1,0 +1,11 @@
+---
+import ListItemEntry from './ListItemEntry.astro';
+import ListItemWrapper from './ListItemWrapper.astro';
+
+const { key, value } = Astro.props;
+---
+
+<ListItemWrapper>
+  <ListItemEntry value={key} class="font-semibold" />
+  <ListItemEntry value={value} />
+</ListItemWrapper>

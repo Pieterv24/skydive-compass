@@ -11,7 +11,13 @@ import {
 
 import PageLayout from '@layouts/PageLayout.astro';
 import { linkTypeToUrl } from '@utils/linkUrl';
-import type { Link } from '~/models/Link';
+import type { Link } from '@models/Link';
+
+import ListCard from '@components/list/ListCard.astro';
+import ListItem from '@components/list/ListItem.astro';
+import ListLink from '@components/list/ListLink.astro';
+import ListItemEntry from '@components/list/ListItemEntry.astro';
+import ListItemWrapper from '@components/list/ListItemWrapper.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
@@ -38,77 +44,53 @@ const { canopy, manufacturer } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 const t = useTranslations(lang);
-
-const ulStyles =
-  'divide-base-lighter bg-base mx-auto max-w-xl list-none divide-y rounded-xl';
-const liStyles = '*:flex *:items-center *:justify-between *:px-4 *:py-4';
-const spanStyles = '[&_span]:first:font-semibold **:text-bw';
-const linkStyle =
-  'text-bw hover:text-primary active:text-secondary font-semibold underline transition-colors';
 ---
 
 <PageLayout pageTitle={canopy.data.name}>
   <h2 class="text-bw mb-6 text-center text-3xl font-extrabold">
     {canopy.data.name}
   </h2>
-  <ul class={`${ulStyles} ${liStyles} ${spanStyles}`}>
-    <li>
-      <span>{t('canopy.manufacturer')}</span>
-      <a href={translatePath(`/info/${manufacturer?.id}`)} class=`${linkStyle}`
-        >{manufacturer?.data.name}</a
-      >
-    </li>
-    <li>
-      <span>{t('canopy.cells')}</span>
-      <span>{canopy.data.cells ?? '—'}</span>
-    </li>
-    <li>
-      <span>{t('canopy.category')}</span>
-      <span>{canopy.data.category ?? '—'}</span>
-    </li>
-    <li>
-      <span>{t('canopy.first-year-of-production')}</span>
-      <span>{canopy.data.firstYearOfProduction ?? '—'}</span>
-    </li>
-    <li>
-      <span>{t('canopy.x-braced')}</span>
+  <ListCard>
+    <ListLink
+      key={t('canopy.manufacturer')}
+      linkUrl={translatePath(`/info/${manufacturer?.id}`)}
+      linkName={manufacturer?.data.name}
+    />
+    <ListItem key={t('canopy.cells')} value={canopy.data.cells ?? '—'} />
+    <ListItem key={t('canopy.category')} value={canopy.data.category ?? '—'} />
+    <ListItem
+      key={t('canopy.first-year-of-production')}
+      value={canopy.data.firstYearOfProduction ?? '—'}
+    />
+    <ListItemWrapper>
+      <ListItemEntry value={t('canopy.x-braced')} class="font-semibold" />
       <span
         class={`inline-flex items-center px-2 py-1 rounded font-bold ${canopy.data.xBraced ? 'bg-primary' : 'bg-secondary'}`}
         >{canopy.data.xBraced ? t('common.yes') : t('common.no')}</span
       >
-    </li>
-    <li>
-      <span>{t('canopy.min-size')} - {t('canopy.max-size')}</span>
-      <span>
-        {
-          canopy.data.minSize && canopy.data.maxSize
-            ? `${canopy.data.minSize}-${canopy.data.maxSize}`
-            : '—'
-        }
-      </span>
-    </li>
-  </ul>
+    </ListItemWrapper>
+    <ListItem
+      key={`${t('canopy.min-size')} - ${t('canopy.max-size')}`}
+      value={canopy.data.minSize && canopy.data.maxSize
+        ? `${canopy.data.minSize}-${canopy.data.maxSize}`
+        : '—'}
+    />
+  </ListCard>
 
   {
     canopy.data.links && canopy.data.links.length > 0 && (
-      <ul class={`mt-4 ${ulStyles} ${liStyles} ${spanStyles}`}>
-        <li>
+      <ListCard class="mt-6">
+        <ListItemWrapper>
           <h3 class="text-bw text-xl font-extrabold">{t('canopy.links')}</h3>
-        </li>
+        </ListItemWrapper>
         {canopy.data.links.map(link => (
-          <li>
-            <span>{t(`link.${link?.type}` as TranslationKey)}</span>
-            <a
-              href={linkTypeToUrl(link as Link)}
-              target="_blank"
-              rel="noopener"
-              class={linkStyle}
-            >
-              {link?.title ?? link?.type}
-            </a>
-          </li>
+          <ListLink
+            key={t(`link.${link?.type}` as TranslationKey)}
+            linkUrl={linkTypeToUrl(link as Link)}
+            linkName={link?.title ?? link?.type}
+          />
         ))}
-      </ul>
+      </ListCard>
     )
   }
 </PageLayout>

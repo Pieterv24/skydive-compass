@@ -1,0 +1,7 @@
+---
+const { class: className } = Astro.props;
+---
+
+<li class={`flex items-center justify-between px-4 py-4 ${className ?? ''}`}>
+  <slot />
+</li>

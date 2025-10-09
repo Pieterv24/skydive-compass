@@ -1,0 +1,5 @@
+---
+const { value, class: className } = Astro.props;
+---
+
+<span class={`text-bw ${className ?? ''}`}>{value}</span>

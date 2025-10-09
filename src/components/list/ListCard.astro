@@ -1,0 +1,11 @@
+---
+const { class: className } = Astro.props;
+
+const ulStyles =
+  'divide-base-lighter bg-base mx-auto max-w-xl list-none divide-y rounded-xl';
+const liStyles = '*:flex *:items-center *:justify-between *:px-4 *:py-4';
+---
+
+<ul class={`${ulStyles} ${liStyles} ${className ?? ''}`}>
+  <slot />
+</ul>
