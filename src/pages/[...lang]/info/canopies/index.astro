@@ -34,8 +34,12 @@ const pageTitle = t('nav.canopies');
           )}
           title={canopy.data.name}
         >
-          <ItemCardTag>Cells: {canopy.data.cells}</ItemCardTag>
-          <ItemCardTag>Category: {canopy.data.category}</ItemCardTag>
+          <ItemCardTag>
+            {t('canopy.cells')}: {canopy.data.cells}
+          </ItemCardTag>
+          <ItemCardTag>
+            {t('canopy.category')}: {canopy.data.category}
+          </ItemCardTag>
         </ItemCard>
       ))
     }
