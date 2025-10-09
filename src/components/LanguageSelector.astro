@@ -27,7 +27,7 @@ const languageList = Object.keys(languages);
   </button>
   <div
     id="languageDropdown"
-    class="text-bw bg-bw-inverse absolute z-10 mt-2 hidden rounded-md shadow-md"
+    class="text-bw bg-bw-inverse absolute right-0 z-10 mt-2 hidden rounded-md shadow-md"
     role="listbox"
     aria-label="Language options"
   >
@@ -55,18 +55,8 @@ const languageList = Object.keys(languages);
       if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
     }
     function openDropdown() {
-      if (dropdown && toggleBtn) {
-        dropdown.classList.remove('left-0', 'right-0');
-        const btnRect = toggleBtn.getBoundingClientRect();
-        const dropdownWidth = 180;
-        if (window.innerWidth - btnRect.right < dropdownWidth) {
-          dropdown.classList.add('left-0');
-        } else {
-          dropdown.classList.add('right-0');
-        }
-        dropdown.classList.remove('hidden');
-        toggleBtn.setAttribute('aria-expanded', 'true');
-      }
+      if (dropdown) dropdown.classList.remove('hidden');
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
     }
     if (toggleBtn && dropdown) {
       toggleBtn.addEventListener('click', function (e) {

@@ -30,7 +30,7 @@
   </button>
   <div
     id="themeDropdown"
-    class="text-bw bg-bw-inverse absolute z-10 mt-2 hidden rounded-md shadow-md"
+    class="text-bw bg-bw-inverse absolute right-0 z-10 mt-2 hidden rounded-md shadow-md"
     role="listbox"
     aria-label="Theme options"
   >
@@ -63,22 +63,8 @@
     }
 
     function openDropdown() {
-      if (dropdown && toggleBtn) {
-        // Remove both left-0 and right-0 before setting
-        dropdown.classList.remove('left-0', 'right-0');
-        // Get bounding rect of button
-        const btnRect = toggleBtn.getBoundingClientRect();
-        const dropdownWidth = 180; // estimate or get from CSS
-        if (window.innerWidth - btnRect.right < dropdownWidth) {
-          // Not enough space on right, show left
-          dropdown.classList.add('left-0');
-        } else {
-          // Default: show right
-          dropdown.classList.add('right-0');
-        }
-        dropdown.classList.remove('hidden');
-        toggleBtn.setAttribute('aria-expanded', 'true');
-      }
+      if (dropdown) dropdown.classList.remove('hidden');
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
     }
 
     if (toggleBtn && dropdown) {
