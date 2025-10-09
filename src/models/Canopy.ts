@@ -1,3 +1,5 @@
+import type { Link } from './Link';
+
 export interface Canopy {
   slug: string;
   manufacturerSlug: string;
@@ -12,5 +14,5 @@ export interface Canopy {
   maxSize?: number;
   url?: string;
   remarks?: { [key: string]: string };
-  links: { name: string; url: string }[];
+  links?: Link[];
 }

@@ -51,10 +51,17 @@ const canopies = defineCollection({
     maxSize: z.number().optional(),
     url: z.string().optional(),
     remarks: z.record(z.string()).optional(),
-    // links: z.array(z.object({
-    //   name: z.string(),
-    //   url: z.string(),
-    // })),
+    links: z
+      .array(
+        z
+          .object({
+            title: z.string().optional(),
+            id: z.string().optional(),
+            type: z.string().optional(),
+          })
+          .optional(),
+      )
+      .optional(),
   }),
 });
 

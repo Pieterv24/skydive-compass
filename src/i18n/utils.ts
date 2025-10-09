@@ -1,5 +1,8 @@
 import { ui, defaultLang, showDefaultLang, languages } from './ui';
 
+export type TranslationKey = keyof (typeof ui)[typeof defaultLang];
+export type Translation = (typeof ui)[typeof defaultLang];
+
 export function useTranslatedPath(input: keyof typeof ui | URL) {
   const lang = input instanceof URL ? getLangFromUrl(input) : input;
 
@@ -32,8 +35,8 @@ export function getUrlWithoutLang(url: URL | Location) {
 export function useTranslations(input: keyof typeof ui | URL) {
   const lang = input instanceof URL ? getLangFromUrl(input) : input;
 
-  return function t(key: keyof (typeof ui)[typeof defaultLang]) {
-    const translations = ui[lang] as (typeof ui)[typeof defaultLang];
+  return function t(key: TranslationKey) {
+    const translations = ui[lang] as Translation;
     return translations[key] || ui[defaultLang][key];
   };
 }
