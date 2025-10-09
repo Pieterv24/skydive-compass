@@ -18,7 +18,7 @@ const manufacturers = defineCollection({
   schema: z.object({
     slug: z.string(),
     name: z.string(),
-    countrycode: z.string().optional(),
+    countryCode: z.string().optional(),
     shortname: z.string().optional(),
     remarks: z.record(z.string()).optional(),
     url: z.string().optional(),
