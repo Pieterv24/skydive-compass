@@ -1,6 +1,6 @@
 // Utility to convert a link type and id to a full URL
 
-import type { Link } from '~/models/Link';
+import type { Link } from '@models/Link';
 
 export function linkTypeToUrl(link: Link): string | undefined {
   switch (link.type) {

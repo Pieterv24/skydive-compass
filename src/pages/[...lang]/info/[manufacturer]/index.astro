@@ -10,11 +10,11 @@ import {
 import PageLayout from '@layouts/PageLayout.astro';
 import ItemCard from '@components/ItemCard.astro';
 import ItemCardTag from '@components/ItemCardTag.astro';
-import ListCard from '~/components/list/ListCard.astro';
-import ListItem from '~/components/list/ListItem.astro';
-import ListLink from '~/components/list/ListLink.astro';
-import ListItemEntry from '~/components/list/ListItemEntry.astro';
-import ListItemWrapper from '~/components/list/ListItemWrapper.astro';
+import ListCard from '@components/list/ListCard.astro';
+import ListItem from '@components/list/ListItem.astro';
+import ListLink from '@components/list/ListLink.astro';
+import ListItemEntry from '@components/list/ListItemEntry.astro';
+import ListItemWrapper from '@components/list/ListItemWrapper.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
