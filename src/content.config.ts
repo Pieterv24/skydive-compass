@@ -19,7 +19,7 @@ const manufacturers = defineCollection({
     slug: z.string(),
     name: z.string(),
     countryCode: z.string().optional(),
-    shortname: z.string().optional(),
+    shortName: z.string().optional(),
     remarks: z.record(z.string()).optional(),
     url: z.string().optional(),
   }),

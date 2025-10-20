@@ -5,10 +5,16 @@ import {
   buildStaticPaths,
   getLangFromUrl,
   useTranslatedPath,
+  useTranslations,
 } from '@i18n/utils';
 import PageLayout from '@layouts/PageLayout.astro';
 import ItemCard from '@components/ItemCard.astro';
 import ItemCardTag from '@components/ItemCardTag.astro';
+import ListCard from '~/components/list/ListCard.astro';
+import ListItem from '~/components/list/ListItem.astro';
+import ListLink from '~/components/list/ListLink.astro';
+import ListItemEntry from '~/components/list/ListItemEntry.astro';
+import ListItemWrapper from '~/components/list/ListItemWrapper.astro';
 
 export async function getStaticPaths() {
   const canopies = await getCollection('canopies');
@@ -30,58 +36,78 @@ export async function getStaticPaths() {
 const { manufacturer, filteredCanopies } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
+const t = useTranslations(lang);
 ---
 
 <PageLayout pageTitle={manufacturer.data.name}>
-  <section
-    class="bg-base-lighter border-base-lighter mx-2 mb-8 rounded-2xl border px-6 py-4 sm:mx-4 md:mx-8"
-  >
-    <h2 class="text-bw mb-2 text-2xl font-bold">{manufacturer.data.name}</h2>
-    <div class="mb-2 flex flex-wrap items-center gap-4">
-      {
-        manufacturer.data.countryCode && (
-          <ItemCardTag>
-            {manufacturer.data.countryCode.toUpperCase()}
-          </ItemCardTag>
-        )
-      }
-      {
-        manufacturer.data.url && (
-          <a
-            href={manufacturer.data.url}
-            target="_blank"
-            rel="noopener"
-            class="text-primary text-sm underline"
-          >
-            Website
-          </a>
-        )
-      }
-    </div>
+  <h1 class="text-bw mb-6 text-center text-3xl font-extrabold">
+    {manufacturer.data.name}
+  </h1>
+  <ListCard>
     {
-      manufacturer.data.remarks && (
-        <p class="text-bw/80 mb-1 text-xs italic">
-          {manufacturer.data.remarks[lang] || manufacturer.data.remarks.en}
-        </p>
+      manufacturer.data.shortName && (
+        <ListItem
+          key={t('manufacturer.short-name')}
+          value={manufacturer.data.shortName}
+        />
       )
     }
-  </section>
-  <h3 class="text-bw mb-4 px-2 text-xl font-semibold sm:px-4 md:px-8">
-    Canopies by {manufacturer.data.name}
-  </h3>
-  <div
-    class="grid grid-cols-1 gap-8 px-2 sm:grid-cols-2 sm:px-4 md:grid-cols-3 md:px-8"
-  >
     {
-      filteredCanopies.map(canopy => (
-        <ItemCard
-          href={translatePath(`/info/${manufacturer.id}/${canopy.data.slug}`)}
-          title={canopy.data.name}
-        >
-          <ItemCardTag>Cells: {canopy.data.cells}</ItemCardTag>
-          <ItemCardTag>Category: {canopy.data.category}</ItemCardTag>
-        </ItemCard>
-      ))
+      manufacturer.data.url && (
+        <ListLink
+          key={t('manufacturer.website')}
+          linkName={manufacturer.data.url}
+          linkUrl={manufacturer.data.url}
+        />
+      )
     }
-  </div>
+    {
+      manufacturer.data.countryCode && (
+        <ListItemWrapper>
+          <ListItemEntry
+            value={t('manufacturer.country')}
+            class="font-semibold"
+          />
+          <span class="bg-secondary inline-flex items-center rounded px-2 py-1 font-bold">
+            {manufacturer.data.countryCode}
+          </span>
+        </ListItemWrapper>
+      )
+    }
+    {
+      manufacturer.data.remarks && (
+        <ListItemWrapper>
+          <ListItemEntry
+            value={t('manufacturer.remarks')}
+            class="font-semibold"
+          />
+          <span class="bg-base-lighter inline-flex max-w-5/8 items-center rounded px-2 py-1 font-bold">
+            {manufacturer.data.remarks[lang] || manufacturer.data.remarks.en}
+          </span>
+        </ListItemWrapper>
+      )
+    }
+  </ListCard>
+  <h2 class="text-bw my-6 text-center text-2xl font-extrabold">
+    {t('nav.canopies')}
+  </h2>
+  {
+    filteredCanopies.length > 0 ? (
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {filteredCanopies.map(canopy => (
+          <ItemCard
+            href={translatePath(`/info/${manufacturer.id}/${canopy.data.slug}`)}
+            title={canopy.data.name}
+          >
+            <ItemCardTag>Cells: {canopy.data.cells}</ItemCardTag>
+            <ItemCardTag>Category: {canopy.data.category}</ItemCardTag>
+          </ItemCard>
+        ))}
+      </div>
+    ) : (
+      <div class="text-bw my-8 text-center text-lg font-semibold">
+        {t('manufacturer.no-canopies')}
+      </div>
+    )
+  }
 </PageLayout>

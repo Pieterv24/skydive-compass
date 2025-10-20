@@ -32,6 +32,11 @@ export const ui = {
     'link.vimeo': 'Vimeo',
     'link.skydivemag': 'Skydive Magazine',
     'link.pdf': 'PDF',
+    'manufacturer.short-name': 'Short Name',
+    'manufacturer.website': 'Website',
+    'manufacturer.country': 'Country',
+    'manufacturer.remarks': 'Remarks',
+    'manufacturer.no-canopies': 'No canopies found for this manufacturer.',
   },
   nl: {
     'common.yes': 'Ja',
@@ -57,5 +62,10 @@ export const ui = {
     'link.vimeo': 'Vimeo',
     'link.skydivemag': 'Skydive Magazine',
     'link.pdf': 'PDF',
+    'manufacturer.short-name': 'Korte naam',
+    'manufacturer.website': 'Website',
+    'manufacturer.country': 'Land',
+    'manufacturer.remarks': 'Opmerkingen',
+    'manufacturer.no-canopies': 'Geen koepels gevonden voor deze fabrikant.',
   },
 } as const;
