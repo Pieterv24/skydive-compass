@@ -35,6 +35,4 @@ const config = defineConfig([
   },
 ]);
 
-// eslint-disable-next-line
-console.log(config);
 export default config;

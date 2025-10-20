@@ -13,6 +13,5 @@ export const GET: APIRoute = ({ site }) => {
   sitemapURL.pathname = sitemapURL.pathname
     .replace(/\/{2,}/g, '/')
     .replace(/\/$/, '');
-  console.log('Sitemap URL:', sitemapURL);
   return new Response(getRobotsTxt(sitemapURL));
 };

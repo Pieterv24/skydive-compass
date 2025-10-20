@@ -68,10 +68,7 @@
     }
 
     if (toggleBtn && dropdown) {
-      console.log('add listener');
-      console.log(toggleBtn);
       toggleBtn.addEventListener('click', function (e) {
-        console.log('click');
         e.stopPropagation();
         if (dropdown.classList.contains('hidden')) {
           openDropdown();
